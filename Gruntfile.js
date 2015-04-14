@@ -45,8 +45,8 @@ module.exports = function (grunt) {
         // tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css', '<%= yeoman.app %>/styles/sass/{,*/}*.sass'],
+        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -381,6 +381,27 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    jsdoc : {
+        dist : {
+            src: ['app/*.js', 'app/scripts/*/*.js'],
+            options: {
+                destination: 'doc'
+            }
+        }
+    },
+
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/styles/sass',
+          src: ['*.sass'],
+          dest: 'app/styles',
+          ext: '.css'
+        }]
+      }
     }
   });
 
@@ -429,6 +450,10 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('doc', [
+    'jsdoc:dist'
   ]);
 
   grunt.registerTask('default', [
