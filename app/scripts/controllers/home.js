@@ -785,12 +785,14 @@
 
 	for(var i = 0; i < countries.length; i++){
 		
+		countries[i].node.style.opacity = 0.4;
+
 		countries[i].mouseover(function(e){
-			this.node.style.opacity = 0.5;
+			this.node.style.opacity = 0.2;
 		});
 
 		countries[i].mouseout(function(e){
-			this.node.style.opacity = 1;
+			this.node.style.opacity = 0.4;
 		});
 
 	}
