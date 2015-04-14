@@ -1,7 +1,7 @@
 'use strict';
 
 /**
-  * @class root.controllers.HomeController
+  * @class root.controllers.HomeCtrl
   * @description home page controller
   * Load SVG world map
   * @param {Class} $scope
@@ -9,7 +9,7 @@
  angular.module('leagueOfApp').controller('HomeCtrl', function ($scope) {
  	$scope.hello = 'hello';
 
-	var rsr = Raphael('map', '100%', '100%');
+	var rsr = new Raphael('map', '100%', '100%');
 	rsr.setViewBox(0, 0, 950, 630);
 	var countries = [];
 
