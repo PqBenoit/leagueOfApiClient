@@ -43,7 +43,7 @@
 	        	 * @param {String} model
 	        	 * @param {Array} params
 	        	 *
-	        	 * @return {JSON} result for get request
+	        	 * @return {JSON} Get request result
 	        	 */
 	            get: function(region, model, params) 
 	            {
@@ -54,10 +54,14 @@
 	             * @function getStaticData
 	             * @memberof root.services.API
 	        	 * @description Sends get method to LOL Static API
+	        	 * @param {String} model
+	        	 * @param {Array} params
+	        	 *
+	        	 * @return {JSON} Get request result
 	             */
-	            getStaticData: function() 
+	            getStaticData: function(model, params) 
 	            {
-	            	
+	            	return $http.get('');
 	            }
 	        };
 
