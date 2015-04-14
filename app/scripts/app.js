@@ -2,11 +2,7 @@
 
  /**
   * @module root.leagueOfApp
-  * @description Main module for AngularJs App 
-  *
-  * @param {Module} ngResource
-  * @param {Module} ngRoute
-  * @param {Module} ngTouch
+  * @description Main module for AngularJs App
   */
 angular
   .module('leagueOfApp', [

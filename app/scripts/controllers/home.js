@@ -2,8 +2,9 @@
 
 /**
   * @class root.controllers.HomeController
-  *
-  * @description root path controller
+  * @description home page controller
+  * Load SVG world map
+  * @param {Class} $scope
   */
  angular.module('leagueOfApp').controller('HomeCtrl', function ($scope) {
  	$scope.hello = 'hello';
