@@ -1,40 +1,65 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name leagueOfApp.service:API
- * @description
- * # League of Legend API
- *
- * Client REST for League of Legend API
+ * @class root.services.API
+ * @description League of Legend API REST client
+ * 
+ * @param $http
  */
+ angular
+ 	.module('leagueOfApp')
+ 		.service('API', 
+ 			
+ 			function($http) {
 
- angular.module('leagueOfApp').service('API', function($http) {
-        var API = {
-        	APIKey: 'fa48a883-3b7d-4ba9-a996-805f017b53dc',
-        	baseUrlStaticData: 'https://global.api.pvp.net/api/lol/static-data/',
-        	versionSaticData: 'v1.2',
+	        var API = {
 
-        	/**
-        	 * @function
-        	 * @description
-        	 * Sends get method to LOL API
-        	 */
-            get: function(region, model, params) 
-            {
-                return $http.get('https://'+region+'.api.pvp.net/api/lol/'+region+'/'+model+'/'+params.join('/')+'?api_key='+API.APIKey);
-            },
+	        	/**
+	        	 * @var APIKey
+	        	 * @memberof root.services.API
+	        	 * @description League of Legend API Key
+	        	 */
+	        	APIKey: 'fa48a883-3b7d-4ba9-a996-805f017b53dc',
 
-            /**
-             * @function
-        	 * @description
-        	 * Sends get method to LOL Static API
-             */
-            getStaticData: function() 
-            {
+	        	/**
+	        	 * @var baseUrlStaticData
+	        	 * @memberof root.services.API
+	        	 * @description base url for League of Legend API statis data
+	        	 */
+	        	baseUrlStaticData: 'https://global.api.pvp.net/api/lol/static-data/',
 
-            }
-        };
+	        	/**
+	        	 * @var versionSaticData
+	        	 * @memberof root.services.API
+	        	 * @description League of Legend API statis data version
+	        	 */
+	        	versionSaticData: 'v1.2',
 
-        return API;
-    });
+	        	/**
+	        	 * @function get
+	        	 * @memberof root.services.API
+	        	 * @description Sends get method to LOL API
+	        	 * @param {String} region
+	        	 * @param {String} model
+	        	 * @param {Array} params
+	        	 *
+	        	 * @return {JSON} result for get request
+	        	 */
+	            get: function(region, model, params) 
+	            {
+	                return $http.get('https://'+region+'.api.pvp.net/api/lol/'+region+'/'+model+'/'+params.join('/')+'?api_key='+API.APIKey);
+	            },
+
+	            /**
+	             * @function getStaticData
+	             * @memberof root.services.API
+	        	 * @description Sends get method to LOL Static API
+	             */
+	            getStaticData: function() 
+	            {
+
+	            }
+	        };
+
+	        return API;
+    	});

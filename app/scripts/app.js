@@ -1,13 +1,13 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name leagueOfApp
- * @description
- * # leagueOfApp
- *
- * Main module of the application.
- */
+ /**
+  * @module root.leagueOfApp
+  * @description Main module for AngularJs App 
+  *
+  * @param {Module} ngResource
+  * @param {Module} ngRoute
+  * @param {Module} ngTouch
+  */
 angular
   .module('leagueOfApp', [
     'ngResource',
