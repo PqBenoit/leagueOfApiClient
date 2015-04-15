@@ -6,8 +6,10 @@
   * Load SVG world map
   * @param {Class} $scope
   */
- angular.module('leagueOfApp').controller('HomeCtrl', function ($scope) {
+ angular.module('leagueOfApp').controller('HomeCtrl', function ($rootScope, $scope) {
  	$scope.hello = 'hello';
+
+ 	$rootScope.region = 'euw';
 
 	var rsr = new Raphael('map', '100%', '100%');
 	rsr.setViewBox(0, 0, 950, 630);
