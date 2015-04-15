@@ -1,6 +1,15 @@
-Summoner Name
-<br />
-<input id="userName" />
-<input type="submit" onclick="" />
-<br />
-<br />
+<form ng-submit="getSummoner(summoner)">
+	<input type="text" ng-model="summoner.name">
+	<button type="button" ng-click="getSummoner(summoner)"></button>
+</form>
+
+<section>
+	SummonerResult : 
+	{{summonerResult}}
+	<br>
+	SummonerGamesResults : 
+	{{gamesResults}}
+	<br>
+	SummonerStatsResults : 
+	{{statsResults}}
+</section>
