@@ -8,5 +8,5 @@
  angular
  	.module('leagueOfApp')
  		.controller('SummonerCtrl', function () {
- 		
+ 			
  		});
