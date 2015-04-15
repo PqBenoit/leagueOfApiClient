@@ -1,7 +1,36 @@
-body
-	padding: 0
-	margin: 0
-	background: #313236
+html
+	height: 100%
+	width: 100%
 
-	#map		
-		background: url(../../images/bg/bg-map.png)
+	body
+		height: 100%
+		width: 100%
+		padding: 0
+		margin: 0
+		background: #313236
+
+		.container 
+			height: 100%
+			width: 100%
+
+			.ng-scope
+				height: 100%
+				width: 100%
+
+				#map
+					height: 100%
+					width: 100%
+					background: url(../../images/bg/bg-map.png)
+					position: relative
+					display: table
+
+					#svg-container
+						width: 1013px
+						height: 669px
+						position: absolute
+						top: 50%
+						left: 50%
+						margin: -334px 0 0 -506px
+
+						path:hover 
+							cursor: pointer
