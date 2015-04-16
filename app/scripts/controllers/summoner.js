@@ -7,13 +7,15 @@
   */
  angular
  	.module('leagueOfApp')
- 		.controller('SummonerCtrl', function ($rootScope, $scope, API, DOMElements) {
+ 		.controller('SummonerCtrl', function ($rootScope, $scope, $routeParams, API, DOMElements) {
 
  			// Init loader and hide it
  			DOMElements.initLoader(document.getElementById('loader'));
 
+ 			console.log($routeParams.region);
+
  			// Configurates LOL api service
- 			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $rootScope.region);
+ 			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $routeParams.region);
 
  			/** 
  			 * @var {HTMLElement} fullScreenSummonerForm 
@@ -69,9 +71,11 @@
 
  				API.getSummonerByName(summoner.name, function(res){
  					if(res) {
+ 						console.log(res);
+
  						$scope.summonerErrors = null;
 
- 						var id = res[summoner.name].id;
+ 						var id = res[summoner.name.toLowerCase()].id;
  						
 	            		getGames(id);
 	            		getStats(id);

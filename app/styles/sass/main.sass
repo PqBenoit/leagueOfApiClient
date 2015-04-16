@@ -1,6 +1,5 @@
 @import "partials/vars"
 @import "partials/mixins"
-
 +reset
 
 *
@@ -11,6 +10,28 @@ html
 body
 	height: 100%
 	font-family: arial, sans-serif
+
+	.ng-scope
+		height: 100%
+		width: 100%
+
+		#map
+			height: 100%
+			width: 100%
+			background: url(../../images/bg/bg-map.png)
+			position: relative
+			display: table
+
+			#svg-container
+				width: 1013px
+				height: 669px
+				position: absolute
+				top: 50%
+				left: 50%
+				margin: -334px 0 0 -506px
+
+				path:hover 
+					cursor: pointer
 	main
 		height: 100%
 		[class*="container-"]
@@ -43,4 +64,3 @@ body
 		background: $secondColor
 		color: #ffffff
   
-

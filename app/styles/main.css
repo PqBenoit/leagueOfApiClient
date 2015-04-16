@@ -54,6 +54,24 @@ html {
 body {
   height: 100%;
   font-family: arial, sans-serif; }
+  body .ng-scope {
+    height: 100%;
+    width: 100%; }
+    body .ng-scope #map {
+      height: 100%;
+      width: 100%;
+      background: url(../../images/bg/bg-map.png);
+      position: relative;
+      display: table; }
+      body .ng-scope #map #svg-container {
+        width: 1013px;
+        height: 669px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -334px 0 0 -506px; }
+        body .ng-scope #map #svg-container path:hover {
+          cursor: pointer; }
   body main {
     height: 100%; }
     body main [class*="container-"] {
