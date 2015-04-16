@@ -5,7 +5,7 @@
  * @description World Map Service
  * 
  */
- angular.module('leagueOfApp').service('mapService', function($location) {
+ angular.module('leagueOfApp').service('mapService', function($location, $rootScope) {
 
  	var Map = {
 
@@ -864,8 +864,9 @@
 
          		array[i].click(function(e){
          			if(this.node.region){
-         				console.log(this.node.region);
-         				console.log($location);
+         				$location.path('summoner/' + this.node.region);
+         				$location.replace();
+         				$rootScope.$apply();
          			}
          		})
 
