@@ -6,9 +6,15 @@
  * @param {Class} $scope
  * @param {Class} mapService
  */
-angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $routeParams, mapService) {
+angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout, mapService, DOMElements) {
  	
- 	var countries = mapService.setMap();
-	mapService.bindRegions(countries);
+ 	DOMElements.initLoader(document.getElementById('loader'));
+ 	DOMElements.startLoader();
+
+	mapService.setMap(function(countries){
+		var countries = countries;
+		mapService.bindRegions(countries);
+		DOMElements.stopLoader();
+	});
 
 });

@@ -16,7 +16,7 @@ angular
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
-      .when('/summoner', {
+      .when('/summoner/:region', {
         templateUrl: 'views/summoner.html',
         controller: 'SummonerCtrl'
       })
