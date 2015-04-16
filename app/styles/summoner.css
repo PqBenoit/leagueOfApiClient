@@ -1,0 +1,52 @@
+#summoner-form {
+  background: url(../../images/bg/bg-map.png);
+  min-height: 100%;
+  position: relative; }
+  #summoner-form form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 5em; }
+    #summoner-form form input#summoner-name {
+      -webkit-transition: all ease 0.2s;
+      -khtml-transition: all ease 0.2s;
+      -moz-transition: all ease 0.2s;
+      -ms-transition: all ease 0.2s;
+      -o-transition: all ease 0.2s;
+      transition: all ease 0.2s;
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      width: 82%;
+      height: 100%;
+      color: #ffffff;
+      text-align: center;
+      text-transform: uppercase;
+      vertical-align: top; }
+      #summoner-form form input#summoner-name:focus {
+        background: rgba(255, 255, 255, 0.3);
+        font-weight: 700; }
+    #summoner-form form button {
+      -webkit-transition: all ease 0.2s;
+      -khtml-transition: all ease 0.2s;
+      -moz-transition: all ease 0.2s;
+      -ms-transition: all ease 0.2s;
+      -o-transition: all ease 0.2s;
+      transition: all ease 0.2s;
+      width: 15%;
+      float: right;
+      background: #FF9C00;
+      font-size: 2em;
+      color: #ffffff;
+      border: none;
+      outline: none;
+      height: 100%;
+      cursor: pointer; }
+      #summoner-form form button:hover {
+        background: #257383; }
+
+/*# sourceMappingURL=summoner.css.map */

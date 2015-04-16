@@ -78,13 +78,13 @@
 
 	                			return callback(data);
 	                		} else {
-	                			console.log('An error occured for get request on lol api. Status Code: '+status+'. Server message: '+data);
+	                			console.log('An error occured for get request on lol api. Status Code: '+status);
 
 	                			return callback(null);
 	                		}
 	                	})
 	                	.error(function(data, status, headers, config){
-	                			console.log('An error occured for get request on lol api. Status Code: '+status+'. Server message: '+data);
+	                			console.log('An error occured for get request on lol api. Status Code: '+status);
 
 	                			return callback(null);
 	                	});
@@ -117,6 +117,36 @@
 	            	API.get('v1.4/summoner/by-name', [summonerName], function(summoner){
 
 	            		return callback(summoner);
+	            	});
+	            },
+
+	            /**
+	        	 * @function getGamesBySummonerId
+	        	 * @memberof root.services.API
+	        	 * @description Get summoner's games by his id
+	        	 * @param {Array} params
+	        	 *
+	        	 * @returns {JSON} Get request result
+	        	 */
+	            getGamesBySummonerId: function (params, callback)
+	            {
+	            	API.get('v1.3/game/by-summoner', params, function(results){
+	            		return callback(results);
+	            	});
+	            },
+
+				/**
+	        	 * @function getStatsBySummonerId
+	        	 * @memberof root.services.API
+	        	 * @description Get summoner's stats by his id
+	        	 * @param {Array} params
+	        	 *
+	        	 * @returns {JSON} Get request result
+	        	 */
+	            getStatsBySummonerId: function (params, callback)
+	            {
+	            	API.get('v1.3/stats/by-summoner', params, function(results){
+	            		return callback(results);
 	            	});
 	            }
 

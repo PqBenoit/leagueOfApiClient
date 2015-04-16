@@ -1,6 +1,15 @@
+/**
+ * @class root.services.mapService
+ * @description World Map Service
+ * 
+ */
 angular.module('leagueOfApp').service('mapService', function() {
 
     var Map = {
+
+        /**
+         *
+         */    
         setMap: function(){
             var rsr = Raphael('svg-container', '1013', '669');
             rsr.setViewBox(0, 0, 1013, 669);
@@ -842,6 +851,9 @@ angular.module('leagueOfApp').service('mapService', function() {
 
         },
 
+        /**
+         *
+         */
         bindRegions: function(array){
 
             for(var i = 0; i < array.length; i++){
