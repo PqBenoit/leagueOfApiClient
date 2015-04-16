@@ -7,10 +7,20 @@
   */
  angular
  	.module('leagueOfApp')
- 		.controller('SummonerCtrl', function ($rootScope, $scope, API) {
+ 		.controller('SummonerCtrl', function ($rootScope, $scope, API, DOMElements) {
 
+ 			// Init loader and hide it
+ 			DOMElements.initLoader(document.getElementById('loader'));
+
+ 			// Configurates LOL api service
  			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $rootScope.region);
 
+ 			/** 
+ 			 * @var {HTMLElement} fullScreenSummonerForm 
+			 * @memberOf root.controllers.SummonerCtrl
+ 			 */
+ 			var fullScreenSummonerForm = document.getElementById('summoner-form');
+ 			fullScreenSummonerForm.style.display = 'block';
 
  			/**
  			 * @function getStats
@@ -55,11 +65,30 @@
  			 */
  			$scope.getSummoner = function (summoner)
  			{
+ 				DOMElements.startLoader();
+
  				API.getSummonerByName(summoner.name, function(res){
- 					var id = res[summoner.name].id;
- 					$scope.summonerResult = id || 'aucun résultat';
-	            	getGames(id);
-	            	getStats(id);
+ 					if(res) {
+ 						$scope.summonerErrors = null;
+
+ 						var id = res[summoner.name].id;
+ 						
+ 						getGames(id);
+	            		getStats(id);
+
+ 						DOMElements.stopLoader();
+ 						DOMElements.removeFlashMessage();
+
+ 						Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
+ 							fullScreenSummonerForm.style.display = 'none';
+ 						});
+ 					} else {
+
+ 						DOMElements.stopLoader();
+ 						DOMElements.displayFlashMessage('Aucun résultat pour ce nom d\'invocateur', 'errors', 4000);
+
+ 						$scope.summonerErrors = 'Aucun résultat pour ce nom d\'invocateur';
+ 					}
  				});
  			};
 
