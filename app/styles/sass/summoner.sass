@@ -1,0 +1,43 @@
+@import "partials/vars"
+@import "partials/mixins"
+
+#summoner-form
+	background: url(../../images/bg/bg-map.png)
+	min-height: 100%
+	position: relative	
+
+	form
+		+center(50%, 5em)
+		width: 50%
+		height: 5em
+
+		input#summoner-name
+			+transition(all ease 0.2s)
+			margin: 0
+			padding: 0
+			border: none
+			outline: none
+			+white(0.2)
+			width: 82%
+			height: 100%
+			color: #ffffff
+			text-align: center
+			text-transform: uppercase
+			vertical-align: top
+			&:focus
+				+white(0.3)
+				font-weight: 700
+		
+		button
+			+transition(all ease 0.2s)
+			width: 15%
+			float: right
+			background: $mainColor
+			font-size: 2em
+			color: #ffffff
+			border: none
+			outline: none
+			height: 100%
+			cursor: pointer
+			&:hover
+				background: $secondColor

@@ -78,13 +78,13 @@
 
 	                			return callback(data);
 	                		} else {
-	                			console.log('An error occured for get request on lol api. Status Code: '+status+'. Server message: '+data);
+	                			console.log('An error occured for get request on lol api. Status Code: '+status);
 
 	                			return callback(null);
 	                		}
 	                	})
 	                	.error(function(data, status, headers, config){
-	                			console.log('An error occured for get request on lol api. Status Code: '+status+'. Server message: '+data);
+	                			console.log('An error occured for get request on lol api. Status Code: '+status);
 
 	                			return callback(null);
 	                	});

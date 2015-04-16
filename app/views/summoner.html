@@ -1,8 +1,27 @@
-<form ng-submit="getSummoner(summoner)">
-	<input type="text" ng-model="summoner.name">
-	<button type="button" ng-click="getSummoner(summoner)"></button>
-</form>
+<section class="container-summoner">
 
-<section>
-	{{summonerResult}}
+	<div id="summoner-form">
+
+		<aside role="note">
+			<h1>
+				
+			</h1>
+			<p>
+				
+			</p>
+		</aside>
+
+		<form ng-submit="getSummoner(summoner)">
+			<input type="text" ng-model="summoner.name" id="summoner-name" placeholder="Nom d'invocateur">
+			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
+		</form>
+
+		
+
+	</div>
+
+	<div id="loader">
+	  	<div class="loader-content"></div>
+	</div>
+	
 </section>
