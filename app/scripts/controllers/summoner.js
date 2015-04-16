@@ -73,7 +73,7 @@
 
  						var id = res[summoner.name].id;
  						
- 						getGames(id);
+	            		getGames(id);
 	            		getStats(id);
 
  						DOMElements.stopLoader();
