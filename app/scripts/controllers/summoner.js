@@ -71,9 +71,11 @@
 
  				API.getSummonerByName(summoner.name, function(res){
  					if(res) {
+ 						console.log(res);
+
  						$scope.summonerErrors = null;
 
- 						var id = res[summoner.name].id;
+ 						var id = res[summoner.name.toLowerCase()].id;
  						
  						getGames(id);
 	            		getStats(id);

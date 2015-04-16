@@ -109,6 +109,7 @@
 	        	 * @memberof root.services.API
 	        	 * @description Get a summoner by his name
 	        	 * @param {String} summonerName
+	        	 * @param {Function} callback
 	        	 *
 	        	 * @returns {JSON} Get request result
 	        	 */
@@ -125,6 +126,7 @@
 	        	 * @memberof root.services.API
 	        	 * @description Get summoner's games by his id
 	        	 * @param {Array} params
+	        	 * @param {Function} callback
 	        	 *
 	        	 * @returns {JSON} Get request result
 	        	 */
@@ -135,11 +137,28 @@
 	            	});
 	            },
 
+	            /**
+	        	 * @function getGameById
+	        	 * @memberof root.services.API
+	        	 * @description Get match data by the game id
+	        	 * @param {Array} params
+	        	 * @param {Function} callback
+	        	 *
+	        	 * @returns {JSON} Get request result
+	        	 */
+	            getMatchById: function (gameId, callback)
+	            {
+	            	API.get('v2.2/match', [gameId], function(results){
+	            		return callback(results);
+	            	});
+	            },
+
 				/**
 	        	 * @function getStatsBySummonerId
 	        	 * @memberof root.services.API
 	        	 * @description Get summoner's stats by his id
 	        	 * @param {Array} params
+	        	 * @param {Function} callback
 	        	 *
 	        	 * @returns {JSON} Get request result
 	        	 */
