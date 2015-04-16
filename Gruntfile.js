@@ -92,7 +92,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 9000,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
 
     jsdoc : {
         dist : {
-            src: ['app/*.js', 'app/scripts/*/*.js'],
+            src: ['app/scripts/*.js', 'app/scripts/*/*.js', 'app/scripts/.js', 'app/scripts/*/.js'],
             options: {
                 destination: 'doc'
             }
@@ -445,6 +445,7 @@ module.exports = function (grunt) {
     'ngAnnotate',
     'copy:dist',
     'cdnify',
+    'sass',
     'cssmin',
     'uglify',
     'filerev',

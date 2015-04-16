@@ -1,13 +1,9 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name leagueOfApp
- * @description
- * # leagueOfApp
- *
- * Main module of the application.
- */
+ /**
+  * @module root.leagueOfApp
+  * @description Main module for AngularJs App
+  */
 angular
   .module('leagueOfApp', [
     'ngResource',
@@ -19,6 +15,10 @@ angular
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
+      })
+      .when('/summoner', {
+        templateUrl: 'views/summoner.html',
+        controller: 'SummonerCtrl'
       })
       .otherwise({
         redirectTo: '/'

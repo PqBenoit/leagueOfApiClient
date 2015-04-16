@@ -1,18 +1,14 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name leagueOfApp.controller:HomeCtrl
- * @description
- * # HomeCtrl
- * Sets up the svg map
+ * @class root.controllers.HomeCtrl
+ * @description home page controller. Init SVG world map
+ * @param {Class} $scope
+ * @param {Class} mapService
  */
-
- angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $routeParams, mapService) { 	
+angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $routeParams, mapService) {
  	
  	var countries = mapService.setMap();
 	mapService.bindRegions(countries);
-
-	
 
 });
