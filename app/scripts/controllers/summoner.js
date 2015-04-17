@@ -7,15 +7,13 @@
   */
  angular
  	.module('leagueOfApp')
- 		.controller('SummonerCtrl', function ($rootScope, $scope, $routeParams, API, DOMElements) {
+ 		.controller('SummonerCtrl', function ($rootScope, $scope, $routeParams, API, DOMElements, Helpers) {
 
  			// Init loader and hide it
  			DOMElements.initLoader(document.getElementById('loader'));
 
- 			console.log($routeParams.region);
-
  			// Configurates LOL api service
- 			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $routeParams.region);
+ 			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $routeParams.region.toLowerCase());
 
  			/** 
  			 * @var {HTMLElement} fullScreenSummonerForm 
@@ -23,6 +21,31 @@
  			 */
  			var fullScreenSummonerForm = document.getElementById('summoner-form');
  			fullScreenSummonerForm.style.display = 'block';
+
+ 			/**
+        	 * @function getChampsAvatar
+        	 * @memberof root.controllers.SummonerCtrl
+        	 * @description Get href for the given champion id
+        	 * @param {Int} champId
+        	 * @param {Function} callback
+        	 *
+        	 * @returns {Void}
+        	 */
+            var setChampsAvatar = function (results)
+            {
+            	$scope.avatars = [];
+
+            	for (var i = 0, j = results.games.length ; i < j ; i++) {
+            		var c = i
+
+	        		API.getStaticData('v1.2/champion', results.games[i].championId, '?champData=image', function(champion){
+
+	            		$scope.avatars.push(API.getAssets('5.2.1/img/champion/'+champion.image.full));
+
+	            	});
+
+	        	}
+            };
 
  			/**
  			 * @function getStats
@@ -35,7 +58,6 @@
  			var getStats = function(summonerId)
  			{
  				API.getStatsBySummonerId([summonerId, 'summary'], function(results){
- 					console.log(results);
  					$scope.statsResults = results || 'aucune stat pour ce joueur';
  				});
  			};
@@ -51,10 +73,14 @@
  			 */
  			var getGames = function(summonerId)
  			{
+ 				
  				API.getGamesBySummonerId([summonerId, 'recent'], function(results){
- 					console.log(results);
- 					$scope.gamesResults = results || 'aucune game';
+
+ 						setChampsAvatar(results);
+ 						$scope.gamesResults = results;
+		
  				});
+
  			};
 
  			/**
@@ -67,33 +93,32 @@
  			 */
  			$scope.getSummoner = function (summoner)
  			{
- 				DOMElements.startLoader();
+ 				if (!summoner) {
+ 					DOMElements.displayFlashMessage('Aucun nom renseigné !', 'errors', 4000);
+ 				} else {
+ 					DOMElements.startLoader();
+ 					API.getSummonerByName(summoner.name, function(res){
+	 					if(res) {
+	 						var id = res[summoner.name.toLowerCase()].id;
+	 						
+	 						getGames(id);
+		            		getStats(id);
 
- 				API.getSummonerByName(summoner.name, function(res){
- 					if(res) {
- 						console.log(res);
+	 						DOMElements.removeFlashMessage();
 
- 						$scope.summonerErrors = null;
+	 						DOMElements.stopLoader();
+	            			Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
+	 							fullScreenSummonerForm.style.display = 'none';
+	 						});
+	 					} else {
 
- 						var id = res[summoner.name.toLowerCase()].id;
- 						
- 						getGames(id);
-	            		getStats(id);
+	 						DOMElements.stopLoader();
+	 						DOMElements.displayFlashMessage('Aucun résultat pour ce nom d\'invocateur', 'errors', 4000);
 
- 						DOMElements.stopLoader();
- 						DOMElements.removeFlashMessage();
-
- 						Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
- 							fullScreenSummonerForm.style.display = 'none';
- 						});
- 					} else {
-
- 						DOMElements.stopLoader();
- 						DOMElements.displayFlashMessage('Aucun résultat pour ce nom d\'invocateur', 'errors', 4000);
-
- 						$scope.summonerErrors = 'Aucun résultat pour ce nom d\'invocateur';
- 					}
- 				});
+	 						$scope.summonerErrors = 'Aucun résultat pour ce nom d\'invocateur';
+	 					}
+	 				});
+ 				}
  			};
 
  		});

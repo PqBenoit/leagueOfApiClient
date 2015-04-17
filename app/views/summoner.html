@@ -16,19 +16,14 @@
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
 
-		
-
 	</div>
 
-	<section>
-		SummonerResult : 
-		{{summonerResult}}
-		<br>
-		SummonerGamesResults : 
-		{{gamesResults}}
-		<br>
-		SummonerStatsResults : 
-		{{statsResults}}
+	<section class="games-history">
+		<ul>
+			<li ng-repeat="(key, game) in gamesResults.games">
+				<img ng-src='{{avatars[key]}}' width="48px" height="48px" class="animate-show" fade-in>
+			</li>
+		</ul>
 	</section>
 
 	<div id="loader">

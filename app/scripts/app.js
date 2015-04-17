@@ -8,7 +8,8 @@ angular
   .module('leagueOfApp', [
     'ngResource',
     'ngRoute',
-    'ngTouch'
+    'ngTouch',
+    'ngAnimate'
   ])
   .config(function ($routeProvider) {
     $routeProvider
