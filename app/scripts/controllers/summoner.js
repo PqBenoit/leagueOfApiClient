@@ -35,7 +35,6 @@
  			var getStats = function(summonerId)
  			{
  				API.getStatsBySummonerId([summonerId, 'summary'], function(results){
- 					console.log(results);
  					$scope.statsResults = results || 'aucune stat pour ce joueur';
  				});
  			};
@@ -52,7 +51,6 @@
  			var getGames = function(summonerId)
  			{
  				API.getGamesBySummonerId([summonerId, 'recent'], function(results){
- 					console.log(results);
  					$scope.gamesResults = results || 'aucune game';
  				});
  			};
@@ -71,14 +69,11 @@
 
  				API.getSummonerByName(summoner.name, function(res){
  					if(res) {
- 						console.log(res);
 
- 						$scope.summonerErrors = null;
-
- 						var id = res[summoner.name.toLowerCase()].id;
+ 						$scope.id = res[summoner.name.toLowerCase()].id;
  						
-	            		getGames(id);
-	            		getStats(id);
+	            		getGames($scope.id);
+	            		getStats($scope.id);
 
  						DOMElements.stopLoader();
  						DOMElements.removeFlashMessage();
@@ -91,7 +86,6 @@
  						DOMElements.stopLoader();
  						DOMElements.displayFlashMessage('Aucun résultat pour ce nom d\'invocateur', 'errors', 4000);
 
- 						$scope.summonerErrors = 'Aucun résultat pour ce nom d\'invocateur';
  					}
  				});
  			};

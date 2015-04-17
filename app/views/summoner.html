@@ -21,14 +21,24 @@
 	</div>
 
 	<section>
-		<ul>
-			<h1>TAMERE</h1>
-			<li ng-repeat="game in gamesResults">
-				<p>{{game.gameId}}</p>
+		<ul id="stats-last-matchs">
+			<h1>10 dernières Games</h1>
+			<li ng-repeat="game in gamesResults.games">
+				<div>
+					<img class="champ" src="">
+					<img class="spell" src="">
+					<img class="spell" src="">
+				</div>
+				<p style="display: none;"><a href="">{{game.gameId}}</a></p>
+				<p>{{game.subType}}</p>
+
 			</li>
 		</ul>
-		SummonerResult : 
-		{{summonerResult}}
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<br>
 		SummonerGamesResults : 
 		{{gamesResults}}

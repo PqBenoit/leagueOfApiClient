@@ -1,42 +1,79 @@
 @import "partials/vars"
 @import "partials/mixins"
 
-#summoner-form
-	background: url(../../images/bg/bg-map.png)
-	min-height: 100%
-	position: relative	
+.container-summoner
 
-	form
-		+center(50%, 5em)
-		width: 50%
-		height: 5em
+	#summoner-form
+		background: url(../../images/bg/bg-map.png)
+		min-height: 100%
+		position: relative	
 
-		input#summoner-name
-			+transition(all ease 0.2s)
-			margin: 0
-			padding: 0
-			border: none
-			outline: none
-			+white(0.2)
-			width: 82%
-			height: 100%
-			color: #ffffff
+		form
+			+center(50%, 5em)
+			width: 50%
+			height: 5em
+
+			input#summoner-name
+				+transition(all ease 0.2s)
+				margin: 0
+				padding: 0
+				border: none
+				outline: none
+				+white(0.2)
+				width: 82%
+				height: 100%
+				color: #ffffff
+				text-align: center
+				vertical-align: top
+				&:focus
+					+white(0.3)
+					font-weight: 700
+			
+			button
+				+transition(all ease 0.2s)
+				width: 15%
+				float: right
+				background: $mainColor
+				font-size: 2em
+				color: #ffffff
+				border: none
+				outline: none
+				height: 100%
+				cursor: pointer
+				&:hover
+					background: $secondColor
+
+	#stats-last-matchs
+		background: url(../../images/bg/bg-map.png)
+		width: 25%
+		padding: 5px
+
+		h1
+			padding: 10px
 			text-align: center
-			vertical-align: top
-			&:focus
-				+white(0.3)
-				font-weight: 700
-		
-		button
-			+transition(all ease 0.2s)
-			width: 15%
-			float: right
+			color: $secondColor
+
+		li
+			overflow: hidden
+			padding: 2px
+			margin-bottom: 5px
 			background: $mainColor
-			font-size: 2em
-			color: #ffffff
-			border: none
-			outline: none
-			height: 100%
-			cursor: pointer
-			&:hover
-				background: $secondColor
+			&:last-of-type
+				margin-bottom: 0
+
+			div
+				float: left
+
+				img
+					background: $secondColor
+					
+				img.champ
+					width: 48px
+					height: 48px
+
+				img.spell
+					width: 20px
+					height: 20px
+
+			p
+				display: inline-block
