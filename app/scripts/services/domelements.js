@@ -107,6 +107,10 @@
              */
             displayFlashMessage: function(message, type, displayTime)
             {
+              if (this.messageHTML) {
+                this.removeFlashMessage();
+              } 
+              
               this.setFlashMessage(message, type);
               this.messageHTML.style.display = "block";
 

@@ -16,18 +16,16 @@
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
 
-		
-
 	</div>
 
 	<section>
 		<ul id="stats-last-matchs">
 			<h1>10 dernières Games</h1>
-			<li ng-repeat="game in gamesResults.games">
+			<li ng-repeat="(key, game) in gamesResults.games">
 				<div class="imgs">
-					<img class="champ" src="">
-					<img class="spell" src="">
-					<img class="spell" src="">
+					<img ng-src='{{avatars[key]}}' width="48px" height="48px" class="animate-show" fade-in>
+					<img ng-src='{{spells.first[key]}}' width="48px" height="48px" class="animate-show" fade-in>
+					<img ng-src='{{spells.second[key]}}' width="48px" height="48px" class="animate-show" fade-in>
 				</div>
 				<p style="display: none;"><a href="">{{game.gameId}}</a></p>
 				<p>{{game.subType}}</p>
