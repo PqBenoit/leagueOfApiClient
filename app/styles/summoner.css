@@ -62,17 +62,26 @@
     background: #FF9C00; }
     .container-summoner #stats-last-matchs li:last-of-type {
       margin-bottom: 0; }
-    .container-summoner #stats-last-matchs li div {
+    .container-summoner #stats-last-matchs li div.imgs {
+      margin-right: 2px;
       float: left; }
-      .container-summoner #stats-last-matchs li div img {
+      .container-summoner #stats-last-matchs li div.imgs img {
         background: #257383; }
-      .container-summoner #stats-last-matchs li div img.champ {
+      .container-summoner #stats-last-matchs li div.imgs img.champ {
+        display: flex;
         width: 48px;
         height: 48px; }
-      .container-summoner #stats-last-matchs li div img.spell {
-        width: 20px;
-        height: 20px; }
+      .container-summoner #stats-last-matchs li div.imgs img.spell {
+        margin-top: 2px;
+        width: 22px;
+        height: 22px; }
     .container-summoner #stats-last-matchs li p {
-      display: inline-block; }
+      display: inline-block;
+      font-size: 8px; }
+    .container-summoner #stats-last-matchs li div.players {
+      width: 160px;
+      height: 80px;
+      float: right;
+      border: 2px #257383 solid; }
 
 /*# sourceMappingURL=summoner.css.map */

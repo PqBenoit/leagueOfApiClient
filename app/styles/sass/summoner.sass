@@ -61,19 +61,28 @@
 			&:last-of-type
 				margin-bottom: 0
 
-			div
+			div.imgs
+				margin-right: 2px
 				float: left
-
 				img
 					background: $secondColor
 					
 				img.champ
+					display: flex
 					width: 48px
 					height: 48px
 
 				img.spell
-					width: 20px
-					height: 20px
+					margin-top: 2px
+					width: 22px
+					height: 22px
 
 			p
 				display: inline-block
+				font-size: 8px
+
+			div.players
+				width: 160px
+				height: 80px
+				float: right
+				border: 2px $secondColor solid

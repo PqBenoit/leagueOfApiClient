@@ -24,14 +24,20 @@
 		<ul id="stats-last-matchs">
 			<h1>10 dernières Games</h1>
 			<li ng-repeat="game in gamesResults.games">
-				<div>
+				<div class="imgs">
 					<img class="champ" src="">
 					<img class="spell" src="">
 					<img class="spell" src="">
 				</div>
 				<p style="display: none;"><a href="">{{game.gameId}}</a></p>
 				<p>{{game.subType}}</p>
+				<p>{{game.fellowPlayers.summonerId}}</p>
+				<ul class="players">
+					<li ng-repeat="player in game.fellowPlayers">
 
+						<p>{{player.summonerId}}</p>
+					</li>
+				</ul>
 			</li>
 		</ul>
 		<br>
