@@ -18,27 +18,26 @@
 
 	</div>
 
-	<section>
-		<ul id="stats-last-matchs">
+	<section id="summoner-history">
+		<ul id="match-history">
 			<h1>10 dernières Games</h1>
-			<li ng-repeat="(key, game) in gamesResults.games">
+			<li ng-repeat="(key, game) in gamesResults.games" show-game>
+				<a show-game></a>
 				<div class="imgs">
 					<img ng-src='{{avatars[key]}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='{{spells.first[key]}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='{{spells.second[key]}}' width="48px" height="48px" class="animate-show" fade-in>
+					<img ng-src='{{spells.first[key]}}' width="24px" height="24px" class="animate-show" fade-in>
+					<img ng-src='{{spells.second[key]}}' width="24px" height="24px" class="animate-show" fade-in>
 				</div>
-				<p style="display: none;"><a href="">{{game.gameId}}</a></p>
 				<p>{{game.subType}}</p>
-				<p>{{game.fellowPlayers.summonerId}}</p>
-				<ul class="players">
+				<!-- <ul class="players">
 					<li ng-repeat="player in game.fellowPlayers">
 
 						<p>{{player.summonerId}}</p>
 					</li>
-				</ul>
+				</ul> -->
 			</li>
 		</ul>
-		<br>
+<!-- 		<br>
 		<br>
 		<br>
 		<br>
@@ -48,7 +47,11 @@
 		{{gamesResults}}
 		<br>
 		SummonerStatsResults : 
-		{{statsResults}}
+		{{statsResults}} -->
+	</section>
+
+	<section id="game" class="animate-show opacity-0">
+		test
 	</section>
 
 	<div id="loader">
