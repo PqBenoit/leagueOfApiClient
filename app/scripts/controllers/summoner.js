@@ -27,6 +27,7 @@
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set href champion avatar in avatars array
 			 * @param {Object} results
+			 * @param {Function} callback
 			 *
 			 * @returns {Void}
 			 */
@@ -45,6 +46,7 @@
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set href spells img in spells array
 			 * @param {Object} results
+			 * @param {Function} callback
 			 *
 			 * @returns {Void}
 			 */
@@ -64,6 +66,7 @@
 			 * @memberOf root.controllers.SummonerCtrl
 			 * @description Get summoner's stats by his id
 			 * @param {int} summoner id
+			 * @param {Function} callback
 			 * 
 			 * @returns {Void}
 			 */
@@ -83,6 +86,7 @@
 			 * @memberOf root.controllers.SummonerCtrl
 			 * @description Get summoner's games by his id
 			 * @param {int} summoner id
+			 * @param {Function} callback
 			 * 
 			 * @returns {Void}
 			 */
@@ -108,7 +112,7 @@
 			 * @function getSummoner
 			 * @memberOf root.controllers.SummonerCtrl
 			 * @description Get a summoner id by his name in LOL API
-			 * @param {string} summoner name (the lol player name)
+			 * @param {string} summoner, the LOL player name
 			 * 
 			 * @returns {Void}
 			 */
