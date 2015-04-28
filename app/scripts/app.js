@@ -21,6 +21,10 @@ angular
         templateUrl: 'views/summoner.html',
         controller: 'SummonerCtrl'
       })
+      .when('/continent', {
+        templateUrl: 'views/continent.html',
+        controller: 'ContinentCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
