@@ -5,7 +5,7 @@
  * @description World Map Service
  * 
  */
- angular.module('leagueOfApp').service('mapService', function($location, $rootScope) {
+ angular.module('leagueOfApp').service('mapService', function ($location, $rootScope) {
 
  	var Map = {
     

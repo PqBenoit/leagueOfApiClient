@@ -21,12 +21,11 @@
 	<section id="summoner-history">
 		<ul id="match-history">
 			<h1>10 dernières Games</h1>
-			<li ng-repeat="(key, game) in gamesResults.games">
-				<a show-game></a>
+			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" show-game>
 				<div class="imgs">
-					<img ng-src='{{avatars[key]}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='{{spells.first[key]}}' width="24px" height="24px" class="animate-show" fade-in>
-					<img ng-src='{{spells.second[key]}}' width="24px" height="24px" class="animate-show" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
 				</div>
 				<p>{{game.subType}}</p>
 				<!-- <ul class="players">
@@ -51,6 +50,7 @@
 	</section>
 
 	<section id="game" class="animate-show opacity-0">
+		{{match}}
 		<div id="map">
 		</div>
 	</section>

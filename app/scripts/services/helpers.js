@@ -9,7 +9,7 @@
   .module('leagueOfApp')
     .service('Helpers', 
       
-      function () {
+      function ($rootScope) {
 
         var helpersFunc = {
           
@@ -42,6 +42,24 @@
             }
 
             return false;
+          },
+
+          /**
+             * @function setVarToRootScope
+             * @memberof root.services.Helpers
+             * @description Add var to the $scope
+             * Thought for directives
+             * @param {String} name
+             * @param {mixed} value
+             * @param {Boolean} force
+             *
+             * @returns {void}
+             */
+          setVarToRootScope: function(name, value, force) 
+          {
+            if (!$rootScope[name] || ($rootScope[name] && force)) {
+              $rootScope[name] = value;
+            }
           }
 
         }; 

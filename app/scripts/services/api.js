@@ -64,18 +64,27 @@
 	        	 * @description Sends get method to LOL API
 	        	 * @param {String} model
 	        	 * @param {Array} params
+	        	 * @param {string} fields
 	        	 * @param {Function} callback
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
-	            get: function (model, params, callback) 
+	            get: function (model, params, fields, callback) 
 	            {
 	            	var url = '';
 
+	            	// set up base url
 	            	if (params === '' || params.length === 0) {
-	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model+'?api_key='+API.APIKey;
+	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model;
 	            	} else {
-	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model+'/'+params.join('/')+'?api_key='+API.APIKey;
+	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model+'/'+params.join('/');
+	            	}
+
+	            	// Add optional fields
+	            	if (fields === '' || fields === null) {
+	            		url = url + '?api_key='+API.APIKey;
+	            	} else {
+	            		url = url + fields + '&api_key='+API.APIKey;
 	            	}
 
 	                $http.get(url)
@@ -110,7 +119,8 @@
 	            {
 	            	var url = '';
 
-	            	if (fields != '' || fields != null) {
+	            	// Set up url with optional fields
+	            	if (fields !== '' || fields !==null) {
 	            		url = 'https://global.api.pvp.net/api/lol/static-data/'+API.region+'/'+model+'/'+id+fields+'&api_key='+API.APIKey;
 	            	} else {
 	            		url = 'https://global.api.pvp.net/api/lol/static-data/'+API.region+'/'+model+'/'+id+'?api_key='+API.APIKey;
@@ -160,7 +170,7 @@
 	        	 */
 	            getSummonerByName: function (summonerName, callback)
 	            {
-	            	API.get('v1.4/summoner/by-name', [summonerName], function(summoner){
+	            	API.get('v1.4/summoner/by-name', [summonerName], '', function(summoner){
 
 	            		return callback(summoner);
 	            	});
@@ -177,7 +187,7 @@
 	        	 */
 	            getGamesBySummonerId: function (params, callback)
 	            {
-	            	API.get('v1.3/game/by-summoner', params, function(results){
+	            	API.get('v1.3/game/by-summoner', params, '', function(results){
 	            		return callback(results);
 	            	});
 	            },
@@ -187,13 +197,14 @@
 	        	 * @memberof root.services.API
 	        	 * @description Get match data by the game id
 	        	 * @param {Array} params
+	        	 * @param {Boolean} includeTimeline
 	        	 * @param {Function} callback
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
-	            getMatchById: function (gameId, callback)
+	            getMatchById: function (gameId, includeTimeline, callback)
 	            {
-	            	API.get('v2.2/match', [gameId], function(result){
+	            	API.get('v2.2/match', [gameId], '?includeTimeline=true', function(result){
 	            		return callback(result);
 	            	});
 	            },
@@ -209,7 +220,7 @@
 	        	 */
 	            getStatsBySummonerId: function (params, callback)
 	            {
-	            	API.get('v1.3/stats/by-summoner', params, function(results){
+	            	API.get('v1.3/stats/by-summoner', params, '', function(results){
 	            		return callback(results);
 	            	});
 	            },
