@@ -21,7 +21,7 @@
 	<section id="summoner-history">
 		<ul id="match-history">
 			<h1>10 dernières Games</h1>
-			<li ng-repeat="(key, game) in gamesResults.games" show-game>
+			<li ng-repeat="(key, game) in gamesResults.games">
 				<a show-game></a>
 				<div class="imgs">
 					<img ng-src='{{avatars[key]}}' width="48px" height="48px" class="animate-show" fade-in>
@@ -51,7 +51,8 @@
 	</section>
 
 	<section id="game" class="animate-show opacity-0">
-		test
+		<div id="map">
+		</div>
 	</section>
 
 	<div id="loader">
