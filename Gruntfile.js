@@ -9,6 +9,8 @@
 
 module.exports = function (grunt) {
 
+    var modRewrite = require('connect-modrewrite');
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -69,14 +71,16 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35729,
       },
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+              modRewrite(['^[^\\.]*$ /index.html [L]']), //Matches everything that does not contain a '.' (period)
               connect.static('.tmp'),
+              connect.static('<%= yeoman.app %>'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')

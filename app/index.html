@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="styles/summoner.css">
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<base href="/">
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
 
 </head>
 
@@ -23,15 +26,22 @@
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
 	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
 	<script src="bower_components/raphael/raphael.js"></script>
 	<script src="bower_components/velocity/velocity.min.js"></script>
 
 	<script src="scripts/app.js"></script>
+	
+	<script src="scripts/services/helpers.js"></script>
 	<script src="scripts/services/api.js"></script>
 	<script src="scripts/services/mapService.js"></script>
 	<script src="scripts/services/domelements.js"></script>
+
 	<script src="scripts/controllers/home.js"></script>
 	<script src="scripts/controllers/summoner.js"></script>
+
+	<script src="scripts/directives/showGame.js"></script>
+	<script src="scripts/directives/fadeIn.js"></script>
 
 </body>
 </html>

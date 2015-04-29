@@ -5,13 +5,10 @@
  * @description World Map Service
  * 
  */
- angular.module('leagueOfApp').service('mapService', function($location, $rootScope) {
+ angular.module('leagueOfApp').service('mapService', function ($location, $rootScope) {
 
  	var Map = {
-
-        /**
-         *
-         */    
+    
          setMap: function(callback){
          	var rsr = Raphael('svg-container', '1013', '669');
          	rsr.setViewBox(0, 0, 1013, 669);
@@ -853,9 +850,6 @@
 
          },
 
-        /**
-         *
-         */
          bindRegions: function(array){
 
          	for(var i = 0; i < array.length; i++){
@@ -864,21 +858,23 @@
 
          		array[i].click(function(e){
          			if(this.node.region){
-         				$location.path('/summoner/'+this.node.region);
-                              $location.replace();
-                              $rootScope.$apply();
+         				$location.path('summoner/' + this.node.region);
+         				$location.replace();
+         				$rootScope.$apply();
          			}
          		})
 
          		array[i].mouseover(function(e){
-         			this.attr({'fill': '#00A6EF'});
+         			this.attr({'fill': '#FF9C00'});
+                  this.node.style.opacity = 0.8;
 
          			if(this.node.region){
          				var region = this.node.region;
 
          				for(var i = 0; i < array.length; i++){
          					if(array[i].node.region === region){
-         						array[i].attr({'fill': '#00A6EF'});
+         						array[i].attr({'fill': '#FF9C00'});
+                           array[i].node.style.opacity = 0.8;
          					}
          				}
          			}
@@ -886,6 +882,7 @@
 
          		array[i].mouseout(function(e){
          			this.attr({'fill': '#999999'});
+                  this.node.style.opacity = 0.4;
 
          			if(this.node.region){
          				var region = this.node.region;

@@ -8,13 +8,13 @@
  */
 angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout, mapService, DOMElements) {
  	
- 	DOMElements.initLoader(document.getElementById('loader'));
- 	DOMElements.startLoader();
+ 	// DOMElements.initLoader(document.getElementById('loader'));
+ 	// DOMElements.startLoader();
 
 	mapService.setMap(function(countries){
 		var countries = countries;
 		mapService.bindRegions(countries);
-		DOMElements.stopLoader();
+		// DOMElements.stopLoader();
 	});
 
 });

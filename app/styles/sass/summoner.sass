@@ -3,6 +3,17 @@
 
 .container-summoner
 
+	/**
+	 * @see directives/fadeIn.js
+	 */
+	.animate-show, .animate-show.ng-hide-add, .animate-show.ng-hide-remove 
+		+transition(all linear 0.5s)
+	.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove, .animate-show.opacity-0
+		+opacity(0)
+	.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active, .animate-show.opacity-1
+		+opacity(1)
+	
+	// Formulaire pour le nom du joueur
 	#summoner-form
 		background: url(../../images/bg/bg-map.png)
 		min-height: 100%
@@ -42,24 +53,39 @@
 				cursor: pointer
 				&:hover
 					background: $secondColor
+	
+	// Section match history
+	#summoner-history
+		display: inline-block
+		width: 30%
+		#match-history
+			background: url(../../images/bg/bg-map.png)
+			padding: 5px
 
-	#stats-last-matchs
-		background: url(../../images/bg/bg-map.png)
-		width: 25%
-		padding: 5px
+			h1
+				padding: 10px
+				text-align: center
+				color: $secondColor
 
-		h1
-			padding: 10px
-			text-align: center
-			color: $secondColor
+			li
+				overflow: hidden
+				padding: 2px
+				margin-bottom: 5px
+				background: $mainColor
+				cursor: pointer
+				&:last-of-type
+					margin-bottom: 0
 
-		li
-			overflow: hidden
-			padding: 2px
-			margin-bottom: 5px
-			background: $mainColor
-			&:last-of-type
-				margin-bottom: 0
+				div.imgs
+					margin-right: 2px
+					float: left
+					img
+						background: $secondColor
+						
+					img.champ
+						display: flex
+						width: 48px
+						height: 48px
 
 			div.imgs
 				float: left
@@ -71,15 +97,13 @@
 					display: flex
 					width: 48px
 					height: 48px
-
 				img.spell
 					margin-top: 2px
 					width: 22px
 					height: 22px
-
-			p
-				display: inline-block
-				font-size: 8px
+				p
+					display: inline-block
+					font-size: 8px
 
 			div.players
 				padding: 2px
@@ -95,3 +119,7 @@
 						p.firstteam
 
 						p.secondteam
+
+	#game
+		display: inline-block
+		width: 60%

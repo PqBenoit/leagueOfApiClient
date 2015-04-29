@@ -54,7 +54,7 @@
 	        	 */
 	        	config: function (apiKey, region)
 	        	{
-	        		API.APIKey = apiKey || 'fa48a883-3b7d-4ba9-a996-805f017b53dc';
+	        		API.APIKey = apiKey.toLowerCase() || 'fa48a883-3b7d-4ba9-a996-805f017b53dc';
 	        		API.region = region || 'euw';
 	        	},
 
@@ -64,13 +64,28 @@
 	        	 * @description Sends get method to LOL API
 	        	 * @param {String} model
 	        	 * @param {Array} params
+	        	 * @param {string} fields
 	        	 * @param {Function} callback
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
-	            get: function (model, params, callback) 
+	            get: function (model, params, fields, callback) 
 	            {
-	            	var url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model+'/'+params.join('/')+'?api_key='+API.APIKey;
+	            	var url = '';
+
+	            	// set up base url
+	            	if (params === '' || params.length === 0) {
+	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model;
+	            	} else {
+	            		url = 'https://'+API.region+'.api.pvp.net/api/lol/'+API.region+'/'+model+'/'+params.join('/');
+	            	}
+
+	            	// Add optional fields
+	            	if (fields === '' || fields === null) {
+	            		url = url + '?api_key='+API.APIKey;
+	            	} else {
+	            		url = url + fields + '&api_key='+API.APIKey;
+	            	}
 
 	                $http.get(url)
 	                	.success(function(data, status, headers, config){
@@ -95,13 +110,53 @@
 	             * @memberof root.services.API
 	        	 * @description Sends get method to LOL Static API
 	        	 * @param {String} model
-	        	 * @param {Array} params
+	        	 * @param {Int} id
+	        	 * @param {string} fields, comma-sparated
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	             */
-	            getStaticData: function (model, params) 
+	            getStaticData: function (model, id, fields, callback) 
 	            {
-	            	return $http.get('');
+	            	var url = '';
+
+	            	// Set up url with optional fields
+	            	if (fields !== '' || fields !==null) {
+	            		url = 'https://global.api.pvp.net/api/lol/static-data/'+API.region+'/'+model+'/'+id+fields+'&api_key='+API.APIKey;
+	            	} else {
+	            		url = 'https://global.api.pvp.net/api/lol/static-data/'+API.region+'/'+model+'/'+id+'?api_key='+API.APIKey;
+	            	}
+
+	                $http.get(url)
+	                	.success(function(data, status, headers, config){
+	                		if (status === 200) {
+
+	                			return callback(data);
+	                		} else {
+	                			console.log('An error occured for get request on lol static api. Status Code: '+status);
+
+	                			return callback(null);
+	                		}
+	                	})
+	                	.error(function(data, status, headers, config){
+	                			console.log('An error occured for get request on lol static api. Status Code: '+status);
+
+	                			return callback(null);
+	                	});
+	            },
+
+	            /**
+	             * @function getAssets
+	             * @memberof root.services.API
+	        	 * @description Send get method to lol CDN. 
+	        	 * @param {String} target
+	        	 *
+	        	 * @returns {String} src
+	             */
+	            getAssets: function (target)
+	            {
+	            	var src = 'http://ddragon.leagueoflegends.com/cdn/'+target;
+
+	            	return src;
 	            },
 
 	            /**
@@ -111,11 +166,11 @@
 	        	 * @param {String} summonerName
 	        	 * @param {Function} callback
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
 	            getSummonerByName: function (summonerName, callback)
 	            {
-	            	API.get('v1.4/summoner/by-name', [summonerName], function(summoner){
+	            	API.get('v1.4/summoner/by-name', [summonerName], '', function(summoner){
 
 	            		return callback(summoner);
 	            	});
@@ -128,11 +183,11 @@
 	        	 * @param {Array} params
 	        	 * @param {Function} callback
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
 	            getGamesBySummonerId: function (params, callback)
 	            {
-	            	API.get('v1.3/game/by-summoner', params, function(results){
+	            	API.get('v1.3/game/by-summoner', params, '', function(results){
 	            		return callback(results);
 	            	});
 	            },
@@ -142,14 +197,15 @@
 	        	 * @memberof root.services.API
 	        	 * @description Get match data by the game id
 	        	 * @param {Array} params
+	        	 * @param {Boolean} includeTimeline
 	        	 * @param {Function} callback
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
-	            getMatchById: function (gameId, callback)
+	            getMatchById: function (gameId, includeTimeline, callback)
 	            {
-	            	API.get('v2.2/match', [gameId], function(results){
-	            		return callback(results);
+	            	API.get('v2.2/match', [gameId], '?includeTimeline=true', function(result){
+	            		return callback(result);
 	            	});
 	            },
 
@@ -160,14 +216,31 @@
 	        	 * @param {Array} params
 	        	 * @param {Function} callback
 	        	 *
-	        	 * @returns {JSON} Get request result
+	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
 	            getStatsBySummonerId: function (params, callback)
 	            {
-	            	API.get('v1.3/stats/by-summoner', params, function(results){
+	            	API.get('v1.3/stats/by-summoner', params, '', function(results){
 	            		return callback(results);
 	            	});
-	            }
+	            },
+
+	          //   *
+	        	 // * @function getChampion
+	        	 // * @memberof root.services.API
+	        	 // * @description Get champion object for given champion id
+	        	 // * @param {Int} champId
+	        	 // * @param {String} fields, comma-separated
+	        	 // * @param {Function} callback
+	        	 // *
+	        	 // * @returns {Function} Callback(JSON||null)
+	        	 
+	          //   getChampion: function (champId, fields, callback)
+	          //   {
+	          //   	API.getStaticData('V1.2/champion', champId, '?champData='+fields, function(champion){
+	          //   		return callback(champion);
+	          //   	});
+	          //   }
 
 	        };
 
