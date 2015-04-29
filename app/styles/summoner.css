@@ -63,8 +63,8 @@
     .container-summoner #stats-last-matchs li:last-of-type {
       margin-bottom: 0; }
     .container-summoner #stats-last-matchs li div.imgs {
-      margin-right: 2px;
-      float: left; }
+      float: left;
+      margin-right: 2px; }
       .container-summoner #stats-last-matchs li div.imgs img {
         background: #257383; }
       .container-summoner #stats-last-matchs li div.imgs img.champ {
@@ -79,9 +79,13 @@
       display: inline-block;
       font-size: 8px; }
     .container-summoner #stats-last-matchs li div.players {
+      padding: 2px;
       width: 160px;
       height: 80px;
       float: right;
       border: 2px #257383 solid; }
+      .container-summoner #stats-last-matchs li div.players ul li {
+        width: 50%;
+        display: inline; }
 
 /*# sourceMappingURL=summoner.css.map */

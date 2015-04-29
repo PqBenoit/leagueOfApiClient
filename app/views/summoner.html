@@ -29,15 +29,18 @@
 					<img class="spell" src="">
 					<img class="spell" src="">
 				</div>
-				<p style="display: none;"><a href="">{{game.gameId}}</a></p>
-				<p>{{game.subType}}</p>
-				<p>{{game.fellowPlayers.summonerId}}</p>
-				<ul class="players">
-					<li ng-repeat="player in game.fellowPlayers">
-
-						<p>{{player.summonerId}}</p>
-					</li>
-				</ul>
+				<!-- <p style="display: none;"><a href="">{{game.gameId}}</a></p> -->
+				<!-- <p>{{game.subType}}</p> -->
+				<div class="players">
+					<ul>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '100'">
+							<p class="firstteam" >{{player.summonerId}}</p>
+						</li>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '200'">
+							<p class="secondteam" >{{player.summonerId}}</p>
+						</li>
+					</ul>
+				</div>
 			</li>
 		</ul>
 		<br>
