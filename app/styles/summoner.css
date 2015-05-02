@@ -1,4 +1,5 @@
 .container-summoner {
+  background: url(../../images/bg/bg-map.png);
   /**
    * @see directives/fadeIn.js
    */ }
@@ -28,7 +29,6 @@
     -o-opacity: 1;
     opacity: 1; }
   .container-summoner #summoner-form {
-    background: url(../../images/bg/bg-map.png);
     min-height: 100%;
     position: relative; }
     .container-summoner #summoner-form form {
@@ -77,10 +77,18 @@
         .container-summoner #summoner-form form button:hover {
           background: #257383; }
   .container-summoner #summoner-history {
-    display: inline-block;
-    width: 30%; }
+    float: left;
+    width: 30%;
+    display: none;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-opacity: 0;
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    -ms-opacity: 0;
+    -o-opacity: 0;
+    opacity: 0; }
     .container-summoner #summoner-history #match-history {
-      background: url(../../images/bg/bg-map.png);
       padding: 5px; }
       .container-summoner #summoner-history #match-history h1 {
         padding: 10px;
@@ -116,7 +124,21 @@
           float: right;
           border: 2px #257383 solid; }
   .container-summoner #game {
-    display: inline-block;
+    float: left;
     width: 60%; }
+    .container-summoner #game #timeline {
+      background: #AAAAAA;
+      height: 3px;
+      line-height: 3px;
+      margin-top: 15px; }
+      .container-summoner #game #timeline .timeline-point {
+        margin-top: -10px;
+        border-radius: 5px;
+        height: 10px;
+        width: 10px;
+        background: #CCCCCC;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px; }
 
 /*# sourceMappingURL=summoner.css.map */

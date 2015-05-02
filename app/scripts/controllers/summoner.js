@@ -22,6 +22,12 @@
 			var fullScreenSummonerForm = document.getElementById('summoner-form');
 			fullScreenSummonerForm.style.display = 'block';
 
+			/** 
+			 * @var {HTMLElement} SummonerMatchHistory 
+			 * @memberOf root.controllers.SummonerCtrl
+			 */
+			var SummonerMatchHistory = document.getElementById('summoner-history');
+
 			/**
 			 * @function setChampsAvatar
 			 * @memberof root.controllers.SummonerCtrl
@@ -35,7 +41,7 @@
 			{
 				$scope.avatars = {};
 
-				API.getStaticData('v1.2/champion', '', '?champData=image&dataById=true', function(data){
+				API.getStaticData('v1.2/champion', '', '?champData=image&dataById=true&version=5.8.1&locale=fr_FR', function(data){
 					$scope.avatars = data;
 					callback();
 				});
@@ -54,7 +60,7 @@
 			{
 				$scope.spells = {};
 
-				API.getStaticData('v1.2/summoner-spell', '', '?spellData=image&dataById=true', function(data){
+				API.getStaticData('v1.2/summoner-spell', '', '?spellData=image&dataById=true&version=5.8.1&locale=fr_FR', function(data){
 					$scope.spells = data;
 					callback();
 				});
@@ -141,6 +147,8 @@
 									DOMElements.stopLoader();
 									Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
 										fullScreenSummonerForm.style.display = 'none';
+										SummonerMatchHistory.style.display = 'block';
+										Velocity(SummonerMatchHistory, {opacity: 1, duration: 1000});
 									});
 
 								});

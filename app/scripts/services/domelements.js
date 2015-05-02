@@ -73,6 +73,7 @@
             stopLoader: function()
             {
               this.loaderHTML.style.display = 'none';
+              Velocity(this.loaderHTML, "stop", true);
             },
 
             /**

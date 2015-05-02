@@ -2,6 +2,7 @@
 @import "partials/mixins"
 
 .container-summoner
+	background: url(../../images/bg/bg-map.png)
 
 	/**
 	 * @see directives/fadeIn.js
@@ -15,7 +16,6 @@
 	
 	// Formulaire pour le nom du joueur
 	#summoner-form
-		background: url(../../images/bg/bg-map.png)
 		min-height: 100%
 		position: relative	
 
@@ -56,10 +56,12 @@
 	
 	// Section match history
 	#summoner-history
-		display: inline-block
+		float: left
 		width: 30%
+		display: none
+		+opacity(0)
+
 		#match-history
-			background: url(../../images/bg/bg-map.png)
 			padding: 5px
 
 			h1
@@ -104,6 +106,21 @@
 					border: 2px $secondColor solid
 
 	#game
-		display: inline-block
+		float: left
 		width: 60%
+
+		#timeline
+			background: #AAAAAA
+			height: 3px
+			line-height: 3px
+			margin-top: 15px 
+			.timeline-point
+				margin-top: -10px
+				border-radius: 5px
+				height: 10px
+				width: 10px
+				background: #CCCCCC
+				cursor: pointer
+				display: inline-block
+				margin-right: 5px
 				

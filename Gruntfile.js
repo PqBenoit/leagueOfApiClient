@@ -79,8 +79,6 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               modRewrite(['^[^\\.]*$ /index.html [L]']), //Matches everything that does not contain a '.' (period)
-              connect.static('.tmp'),
-              connect.static('<%= yeoman.app %>'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
