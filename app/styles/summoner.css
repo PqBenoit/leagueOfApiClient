@@ -229,4 +229,33 @@
             height: auto;
             width: auto; }
 
+.player-stats {
+  padding: 20px 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-opacity: 0;
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  -ms-opacity: 0;
+  -o-opacity: 0;
+  opacity: 0; }
+  .player-stats h1 {
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    margin: 10px 0; }
+  .player-stats ul {
+    margin-top: 20px; }
+    .player-stats ul:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .player-stats ul li {
+      padding: 0 10px;
+      height: 50px;
+      width: 280px;
+      color: white;
+      display: inline-block;
+      float: left; }
+
 /*# sourceMappingURL=summoner.css.map */

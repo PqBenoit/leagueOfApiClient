@@ -16,10 +16,19 @@
 			<input type="text" ng-model="summoner.name" id="summoner-name" placeholder="Nom d'invocateur">
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
-
 	</div>
 
+	<div class="player-stats" id="summoner-stats">
+		<h1>Statistiques globales du joueur:</h1>
+		<ul>
+			<li ng-repeat="(key, gameMode) in statsResults.playerStatSummaries">
+				<h2>{{gameMode.playerStatSummaryType}}</h2>
+				<p>Victoires: {{gameMode.wins}}</p>
+			</li>
+		</ul>
+	</div>
 	<section id="summoner-history">
+
 		<ul id="match-history">
 			<h1>10 dernières parties</h1>
 			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '200', blue: game.teamId =='100', active: $index == selected}" ng-click="select(key)" show-game>
@@ -38,7 +47,7 @@
 						 / 
 						<span ng-if="game.stats.numDeaths">{{game.stats.numDeaths}} </span>
 						<span ng-if="!game.stats.numDeaths">0</span>
-						 / xœ
+						 / 
 						<span ng-if="game.stats.assists">{{game.stats.assists}} </span>
 						<span ng-if="!game.stats.assists">0</span>
 					</p>
