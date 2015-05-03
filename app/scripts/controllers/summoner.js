@@ -10,7 +10,7 @@
 		.controller('SummonerCtrl', function ($rootScope, $scope, $routeParams, API, DOMElements, Helpers) {
 
 			// Init loader and hide it
-			DOMElements.initLoader(document.getElementById('loader'));
+			DOMElements.initLoader(document.getElementById('loader-content'));
 
 			// Configurates LOL api service
 			API.config('fa48a883-3b7d-4ba9-a996-805f017b53dc', $routeParams.region.toLowerCase());
@@ -31,7 +31,7 @@
 			/**
 			 * @function setChampsAvatar
 			 * @memberof root.controllers.SummonerCtrl
-			 * @description Set href champion avatar in avatars array
+			 * @description Set champion image infos in scope
 			 * @param {Function} callback
 			 *
 			 * @returns {Void}
@@ -40,8 +40,26 @@
 			{
 				$scope.avatars = {};
 
-				API.getStaticData('v1.2/champion', '', '?champData=image&dataById=true&version=5.8.1&locale=fr_FR', function(data){
+				API.getStaticData('v1.2/champion', '', '?champData=image&dataById=true', function(data){
 					$scope.avatars = data;
+					callback();
+				});
+			};
+
+			/**
+			 * @function setChampsInfos
+			 * @memberof root.controllers.SummonerCtrl
+			 * @description Set champion infos in scope
+			 * @param {Function} callback
+			 *
+			 * @returns {Void}
+			 */
+			var setChampsInfos = function (callback)
+			{
+				$scope.champInfos = {};
+
+				API.getStaticData('v1.2/champion', '', '?champData=info&dataById=true', function(data){
+					$scope.champInfos = data;
 					callback();
 				});
 			};
@@ -49,7 +67,7 @@
 			/**
 			 * @function setSpells
 			 * @memberof root.controllers.SummonerCtrl
-			 * @description Set href spells img in spells array
+			 * @description Set spell images info in scope
 			 * @param {Function} callback
 			 *
 			 * @returns {Void}
@@ -102,8 +120,10 @@
 
 							setSpells(function() {
 
-								$scope.gamesResults = results || 'aucune game';
-								callback();
+								setChampsInfos(function(){
+									$scope.gamesResults = results || 'aucune game';
+									callback();
+								})
 
 							});
 

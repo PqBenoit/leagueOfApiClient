@@ -126,16 +126,7 @@
           border: 2px #257383 solid; }
   .container-summoner #game {
     float: left;
-    width: 70%;
-    display: none;
-    filter: alpha(opacity=0);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    -webkit-opacity: 0;
-    -khtml-opacity: 0;
-    -moz-opacity: 0;
-    -ms-opacity: 0;
-    -o-opacity: 0;
-    opacity: 0; }
+    width: 70%; }
     .container-summoner #game #timeline {
       background: #AAAAAA;
       height: 3px;

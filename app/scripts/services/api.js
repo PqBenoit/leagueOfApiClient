@@ -225,22 +225,22 @@
 	            	});
 	            },
 
-	          //   *
-	        	 // * @function getChampion
-	        	 // * @memberof root.services.API
-	        	 // * @description Get champion object for given champion id
-	        	 // * @param {Int} champId
-	        	 // * @param {String} fields, comma-separated
-	        	 // * @param {Function} callback
-	        	 // *
-	        	 // * @returns {Function} Callback(JSON||null)
-	        	 
-	          //   getChampion: function (champId, fields, callback)
-	          //   {
-	          //   	API.getStaticData('V1.2/champion', champId, '?champData='+fields, function(champion){
-	          //   		return callback(champion);
-	          //   	});
-	          //   }
+	            /*
+	        	 * @function getChampion
+	        	 * @memberof root.services.API
+	        	 * @description Get champion object for given champion id
+	        	 * @param {Int} champId
+	        	 * @param {String} fields, comma-separated
+	        	 * @param {Function} callback
+	        	 *
+	        	 * @returns {Function} Callback(JSON||null)
+	        	 */
+	            getChampion: function (champId, fields, callback)
+	            {
+	            	API.getStaticData('V1.2/champion', champId, fields, function(champion){
+	            		return callback(champion);
+	            	});
+	            }
 
 	        };
 

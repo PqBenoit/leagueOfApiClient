@@ -21,8 +21,9 @@
 						MatchMap.timestamp = attr.timestamp;
 						// Refresh map data
 						MatchMap.setTimeline();
-			            var cords = MatchMap.getPositions();
-			            MatchMap.loadMap(cords);
+			            MatchMap.getParticipantPositions(function(cords){
+				            MatchMap.loadMap(cords);
+			            });
 						
 					});
 			    }

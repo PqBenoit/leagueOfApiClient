@@ -22,6 +22,8 @@
 		<ul id="match-history">
 			<h1>10 dernières Games</h1>
 			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" show-game>
+				<div ng-if="game.stats.win == true">Victoire</div>
+				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
@@ -71,12 +73,16 @@
 		</div>
 		<div id="timeline">
 		</div>
+		<div id="timeline-events">
+		</div>
 	</section>
 
 	<div class="clear"></div>
-
-	<div id="loader">
-	  	<div class="loader-content"></div>
+	
+	<div id="loader-content">
+		<div id="loader">
+		  	<div class="loader-inner"></div>
+		</div>
 	</div>
 	
 </section>
