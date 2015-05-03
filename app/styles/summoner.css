@@ -112,15 +112,17 @@
           border-right: 4px solid #E25041; }
         .container-summoner #summoner-history #match-history li:last-of-type {
           margin-bottom: 0; }
+        .container-summoner #summoner-history #match-history li div {
+          display: inline-block; }
         .container-summoner #summoner-history #match-history li div.imgs {
-          margin-right: 2px;
-          float: left; }
+          float: left;
+          margin-right: 5px; }
           .container-summoner #summoner-history #match-history li div.imgs img {
             background: #257383; }
           .container-summoner #summoner-history #match-history li div.imgs img.champ {
             display: flex;
-            width: 48px;
-            height: 48px; }
+            width: 55px;
+            height: 55px; }
           .container-summoner #summoner-history #match-history li div.imgs img.spell {
             margin-top: 2px;
             width: 22px;
@@ -137,13 +139,36 @@
         .container-summoner #summoner-history #match-history li p.game-type {
           bottom: 5px; }
         .container-summoner #summoner-history #match-history li ul.players {
-          width: 160px;
-          height: 80px;
+          margin-top: 5px;
+          width: 25px;
+          height: 25px; }
+          .container-summoner #summoner-history #match-history li ul.players p {
+            display: inline-block;
+            font-size: 8px; }
+        .container-summoner #summoner-history #match-history li div.scoreAndItems {
+          padding: 2px;
+          float: center; }
+          .container-summoner #summoner-history #match-history li div.scoreAndItems p {
+            padding-bottom: 3px; }
+        .container-summoner #summoner-history #match-history li div.players {
+          padding: 2px;
           float: right;
-          border: 2px #257383 solid; }
+          width: 160px;
+          height: 80px; }
+          .container-summoner #summoner-history #match-history li div.players ul li {
+            width: 50%;
+            display: inline-block;
+            margin-bottom: 2px;
+            padding: 0px; }
+            .container-summoner #summoner-history #match-history li div.players ul li p {
+              width: 100%;
+              text-align: center;
+              font-size: 8px; }
   .container-summoner #game {
     float: left;
-    width: 70%; }
+    width: 70%;
+    display: inline-block;
+    width: 60%; }
     .container-summoner #game #timeline {
       height: 3px;
       line-height: 3px;

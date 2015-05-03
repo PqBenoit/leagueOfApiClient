@@ -87,17 +87,20 @@
 				&:last-of-type
 					margin-bottom: 0
 
+				div
+					display: inline-block
+
 				div.imgs
-					margin-right: 2px
 					float: left
+					margin-right: 5px
 					img
 						background: $secondColor
 						
 					img.champ
 						display: flex
-						width: 48px
-						height: 48px
-
+						width: 55px
+						height: 55px
+						
 					img.spell
 						margin-top: 2px
 						width: 22px
@@ -117,15 +120,47 @@
 					bottom: 5px
 
 				ul.players
+					margin-top: 5px
+					width: 25px
+					height: 25px
+					p
+						display: inline-block
+						font-size: 8px
+
+				div.scoreAndItems
+					padding: 2px
+					float: center
+
+					p
+						padding-bottom: 3px
+
+				div.players
+					padding: 2px
+					float: right
 					width: 160px
 					height: 80px
-					float: right
-					border: 2px $secondColor solid
+					
+					ul
+						li
+							width: 50%
+							display: inline-block
+							margin-bottom: 2px
+							padding: 0px
+
+							p
+								width: 100%
+								text-align: center
+								font-size: 8px
+								
+							p.firstteam
+
+							p.secondteam
 
 	#game
 		float: left
 		width: 70%
-
+		display: inline-block
+		width: 60%
 		#timeline
 			// background: #AAAAAA
 			height: 3px
@@ -190,4 +225,3 @@
 						display: inline-block
 						height: auto
 						width: auto
-				
