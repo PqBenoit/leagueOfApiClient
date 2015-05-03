@@ -156,8 +156,11 @@ body {
       top: -5em; }
     body main .eventsButton {
       position: absolute;
-      top: 0;
+      bottom: -60px;
       left: 0;
+      right: 0;
+      margin: auto;
+      width: 200px;
       background: rgba(0, 0, 0, 0.5);
       color: #ffffff;
       padding: 5px;

@@ -204,11 +204,13 @@
 
             var buttonEvents = d3.select('#map-game').append('button')
                 .attr('class', 'eventsButton')
-                .html('Voir/cacher les évènements')
-                .on("click", function(){
+                .html('Voir les évènements')
+                .on("click", function(e){
                       if (Map.eventsRendered === false) {
+                        buttonEvents.html('Cacher les évènements');
                         Map.renderEvents(cordsEvent, svg, xScale, yScale, tooltip);
                       } else {
+                        buttonEvents.html('Voir les évènements');
                         Map.removeEvents(svg);
                       }
                 });
