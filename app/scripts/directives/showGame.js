@@ -6,7 +6,7 @@
   */
  angular
  	.module('leagueOfApp')
- 		.directive('showGame', function (API, Helpers, Map){
+ 		.directive('showGame', function (API, Helpers, MatchMap){
 		    return {
 		    	restrict: 'A',
 		    	scope: true,
@@ -20,8 +20,13 @@
 						var gameSection = document.getElementById('game');
 						gameSection.className = 'animate-show opacity-0';
 
-						Map.initMap(attr.game, attr.mode, attr.timestamp, scope, function(){
+						var matchSection = document.getElementById('game');
+
+						MatchMap.initMap(attr.game, attr.mode, attr.timestamp, scope, function(){
               				gameSection.className = gameSection.className + ' opacity-1';
+
+              				matchSection.style.display = 'block';
+							Velocity(matchSection, {opacity: 1, duration: 1000});
 						});
 						
 					});

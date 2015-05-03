@@ -26,6 +26,13 @@
              * @description HTML element for flash message
              */
             messageHTML: null,
+
+            /**
+             * @var tooltipHTML
+             * @memberof root.services.DOMElements
+             * @description HTML element for tooltip
+             */
+            tooltipHTML: null,
             
             /**
              * @function initLoader
@@ -35,13 +42,11 @@
              *
              * @returns {Void}
              */
-            initLoader: function(element)
+            initLoader: function (element)
             {
               this.loaderHTML = element;
               this.loaderHTML.style.display = 'none';
             },
-
-            
 
             /**
              * @function startLoader
@@ -50,7 +55,7 @@
              *
              * @returns {Void}
              */
-            startLoader: function()
+            startLoader: function ()
             {
               this.loaderHTML.style.display = 'block';
               Velocity(this.loaderHTML, {
@@ -70,7 +75,7 @@
              *
              * @returns {Void}
              */
-            stopLoader: function()
+            stopLoader: function ()
             {
               this.loaderHTML.style.display = 'none';
               Velocity(this.loaderHTML, "stop", true);
@@ -85,7 +90,7 @@
              *
              * @returns {Void}
              */
-            setFlashMessage: function(message, type)
+            setFlashMessage: function (message, type)
             {
               var body = document.getElementsByTagName('body');
               
@@ -106,7 +111,7 @@
              *
              * @returns {Void}
              */
-            displayFlashMessage: function(message, type, displayTime)
+            displayFlashMessage: function (message, type, displayTime)
             {
               if (this.messageHTML) {
                 this.removeFlashMessage();
@@ -121,18 +126,48 @@
             },
 
             /**
-             * @function startLoader
+             * @function removeFlashMessage
              * @memberof root.services.DOMElements
              * @description Remove it
              *
              * @returns {Void}
              */
-            removeFlashMessage: function()
+            removeFlashMessage: function ()
             {
               if (this.messageHTML) {  
                 this.messageHTML.style.display = "none";
                 this.messageHTML.innerHTML = '';
               }
+            },
+
+            /**
+             * @function displayTooltip
+             * @memberof root.services.DOMElements
+             * @description set up the tooltip HTMLElement
+             * @param {HTMLElement} parentElement
+             *
+             * @returns {Void}
+             */
+            displayTooltip: function (parentElement, content)
+            {
+              this.tooltipHTML = document.createElement('span');
+              var xpos = parentElement.offsetLeft;
+              var ypos = parentElement.offsetTop;
+
+              parentElement.style.position = 'relative';
+
+              this.tooltipHTML.className = 'tooltip';
+              this.tooltipHTML.innerHTML = content;
+              this.tooltipHTML.style.position = 'absolute';
+              this.tooltipHTML.style.left = "0";
+              this.tooltipHTML.style.top = "-50px";
+
+              parentElement.appendChild(this.tooltipHTML);
+            },
+
+            removeTooltip: function ()
+            {
+              this.tooltipHTML.remove();
             }
         };
 

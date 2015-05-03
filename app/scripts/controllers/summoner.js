@@ -32,12 +32,11 @@
 			 * @function setChampsAvatar
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set href champion avatar in avatars array
-			 * @param {Object} results
 			 * @param {Function} callback
 			 *
 			 * @returns {Void}
 			 */
-			var setChampsAvatar = function (results, callback)
+			var setChampsAvatar = function (callback)
 			{
 				$scope.avatars = {};
 
@@ -51,12 +50,11 @@
 			 * @function setSpells
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set href spells img in spells array
-			 * @param {Object} results
 			 * @param {Function} callback
 			 *
 			 * @returns {Void}
 			 */
-			var setSpells = function (results, callback)
+			var setSpells = function (callback)
 			{
 				$scope.spells = {};
 
@@ -100,9 +98,9 @@
 			{
 				API.getGamesBySummonerId([summonerId, 'recent'], function(results){
 
-						setChampsAvatar(results, function(){	
+						setChampsAvatar(function(){	
 
-							setSpells(results, function() {
+							setSpells(function() {
 
 								$scope.gamesResults = results || 'aucune game';
 								callback();
@@ -147,6 +145,7 @@
 									DOMElements.stopLoader();
 									Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
 										fullScreenSummonerForm.style.display = 'none';
+										
 										SummonerMatchHistory.style.display = 'block';
 										Velocity(SummonerMatchHistory, {opacity: 1, duration: 1000});
 									});

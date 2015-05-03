@@ -1,14 +1,14 @@
 'use strict';
 
 /**
- * @class root.services.Map
+ * @class root.services.matchMap
  * @description LOL map game service
  */
  angular
   .module('leagueOfApp')
-    .service('Map', 
+    .service('MatchMap', 
       
-      function (Helpers, API, $compile) {
+      function (Helpers, API, DOMElements, $compile) {
 
         var Map = {
 
@@ -19,15 +19,15 @@
           timestamp: 0,
           
           /**
-             * @function initMap
-             * @memberof root.services.Map
-             * @description Init LOL map
-             * @param {int} gameId
-             * @param {int} timestamp
-             * @param {function} callback
-             *
-             * @returns {function}
-             */
+           * @function initMap
+           * @memberof root.services.MatchMap
+           * @description Init LOL map
+           * @param {int} gameId
+           * @param {int} timestamp
+           * @param {function} callback
+           *
+           * @returns {function}
+           */
           initMap: function(gameId, gameMode, timestamp, scope, callback) {
 
             Map.timestamp = timestamp || 0;
@@ -46,13 +46,21 @@
               var cords = Map.getPositions();
               Map.loadMap(cords);
 
+              // Allow to use match data in root scope
+              data.minuteDuration = Math.floor(data.matchDuration/60);
+              Helpers.setVarToRootScope('match', data, true);
+
               return callback();
             });
 
           },
 
           /**
+           * @function getPositions
+           * @memberof root.services.MatchMap
+           * @description set up an array for events coordinates
            *
+           * @returns {Void}
            */
           getPositions: function ()
           {
@@ -72,9 +80,9 @@
                     if (positions) {
 
                       if (parseInt(participantId) <= 5) {
-                        cords.push({x: positions.x, y: positions.y, team: 1});
+                        cords.push({x: positions.x, y: positions.y, team: 1, participantData: participantFrame[participantId]});
                       } else {
-                        cords.push({x: positions.x, y: positions.y, team: 2});
+                        cords.push({x: positions.x, y: positions.y, team: 2, participantData: participantFrame[participantId]});
                       }
                     }
                   }
@@ -86,7 +94,12 @@
           },
 
           /**
+           * @function loadMap
+           * @memberof root.services.MatchMap
+           * @description Create the map with the given events coordiantes
+           * @param {Array} cords, @see root.services.MatchMap.getPositions
            *
+           * @returns {Void}
            */
           loadMap: function (cords)
           {
@@ -119,6 +132,12 @@
                 .attr("width", width)
                 .attr("height", height);
 
+            var tooltip = d3.select("#map-game")
+                  .append("div")
+                  .style("position", "absolute")
+                  .style("z-index", "10")
+                  .style("visibility", "hidden");
+
             svg.append('image')
                 .attr('xlink:href', bg)
                 .attr('x', '0')
@@ -134,16 +153,32 @@
                     .attr('r', 5)
                     .attr('fill', function(d) {
                       if (d.team == 1) {
-                        return '#000000';
+                        return '#E25041';
                       } else {
-                        return '#444444';
+                        return '#2C82C9';
                       }
                     })
-                    .attr('class', 'kills');
+                    .attr('class', 'kills')
+                    .on("mouseover", function(){
+                      return tooltip.style("visibility", "visible");
+                    })
+                    .on("mousemove", function(d){
+                      return tooltip.style("top", "0")
+                                    .style("left","0")
+                                    .attr('class', 'tooltip-map')
+                                    .text("level: "+d.participantData.level);
+                    })
+                    .on("mouseout", function(){
+                      return tooltip.style("visibility", "hidden");
+                    });
           },
 
           /**
+           * @function setTimeline
+           * @memberof root.services.MatchMap
+           * @description Create the timeline, each timeline frames given by lol api 'match' make a part of the timeline
            *
+           * @returns {Void}
            */
           setTimeline: function ()
           {
@@ -155,7 +190,8 @@
               var timePoint = document.createElement('p');
 
               timePoint.setAttribute('data-timestamp', frame.timestamp);
-              timePoint.setAttribute('refresh-game', '');
+              timePoint.setAttribute('refresh-map', '');
+              timePoint.setAttribute('timeline-tooltip', '');
               timePoint.className = 'timeline-point';
 
               timeline.appendChild(timePoint);

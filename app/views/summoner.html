@@ -50,11 +50,30 @@
 	</section>
 
 	<section id="game" class="animate-show opacity-0">
+		<div id="match-resume">
+			<h1>{{match.minuteDuration}} minutes</h1>
+			<section id="first-team-resume">
+				<ul>
+					<li ng-repeat="(key, participant) in match.participants | limitTo: 5">
+						<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[participant.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
+					</li>
+				</ul>
+			</section>
+			<section id="second-team-resume">
+				<ul>
+					<li ng-repeat="(key, participant) in match.participants.slice().reverse() | limitTo: 5">
+						<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[participant.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
+					</li>
+				</ul>
+			</section>
+		</div>
 		<div id="map-game">
 		</div>
 		<div id="timeline">
 		</div>
 	</section>
+
+	<div class="clear"></div>
 
 	<div id="loader">
 	  	<div class="loader-content"></div>

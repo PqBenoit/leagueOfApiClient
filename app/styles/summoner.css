@@ -1,5 +1,7 @@
 .container-summoner {
   background: url(../../images/bg/bg-map.png);
+  height: auto !important;
+  min-height: 100%;
   /**
    * @see directives/fadeIn.js
    */ }
@@ -29,14 +31,13 @@
     -o-opacity: 1;
     opacity: 1; }
   .container-summoner #summoner-form {
-    min-height: 100%;
-    position: relative; }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 5em; }
     .container-summoner #summoner-form form {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50%;
       height: 5em; }
       .container-summoner #summoner-form form input#summoner-name {
         -webkit-transition: all ease 0.2s;
@@ -125,7 +126,16 @@
           border: 2px #257383 solid; }
   .container-summoner #game {
     float: left;
-    width: 60%; }
+    width: 70%;
+    display: none;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    -webkit-opacity: 0;
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    -ms-opacity: 0;
+    -o-opacity: 0;
+    opacity: 0; }
     .container-summoner #game #timeline {
       background: #AAAAAA;
       height: 3px;
@@ -140,5 +150,23 @@
         cursor: pointer;
         display: inline-block;
         margin-right: 5px; }
+    .container-summoner #game #map-game {
+      position: relative; }
+      .container-summoner #game #map-game circle {
+        cursor: pointer; }
+    .container-summoner #game #match-resume {
+      overflow: hidden; }
+      .container-summoner #game #match-resume #first-team-resume {
+        display: inline-block; }
+        .container-summoner #game #match-resume #first-team-resume ul {
+          overflow: hidden; }
+          .container-summoner #game #match-resume #first-team-resume ul li {
+            border-left: 4px solid #E25041; }
+      .container-summoner #game #match-resume #second-team-resume {
+        display: inline-block; }
+        .container-summoner #game #match-resume #second-team-resume ul {
+          overflow: hidden; }
+          .container-summoner #game #match-resume #second-team-resume ul li {
+            border-left: 4px solid #2C82C9; }
 
 /*# sourceMappingURL=summoner.css.map */
