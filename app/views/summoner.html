@@ -23,9 +23,16 @@
 			<h1>10 dernières Games</h1>
 			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" show-game>
 				<div class="imgs">
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show champ" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+				</div>
+				<div class="scoreAndItems">
+					<p>{{game.stats.championsKilled}} / {{game.stats.numDeaths}} / {{game.stats.assists}}</p>
+					<div>
+						<p>{{game.stats.item0}} {{game.stats.item1}} {{game.stats.item2}}</p>
+						<p>{{game.stats.item3}} {{game.stats.item4}} {{game.stats.item5}}</p>
+					</div>
 				</div>
 				<!-- <p style="display: none;"><a href="">{{game.gameId}}</a></p> -->
 				<!-- <p>{{game.subType}}</p> -->
