@@ -147,13 +147,15 @@ body {
     body main .tooltip-map {
       visibility: hidden;
       color: #ffffff;
-      height: 5em;
-      line-height: 5em;
+      height: 20px;
+      line-height: 20px;
       background: rgba(0, 0, 0, 0.5);
       position: absolute;
       left: 0;
-      width: 512px;
-      top: -5em; }
+      right: 0;
+      margin: auto;
+      width: 200px;
+      top: 0; }
     body main .eventsButton {
       position: absolute;
       bottom: -60px;
