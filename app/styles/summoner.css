@@ -103,13 +103,15 @@
         overflow: hidden;
         padding: 2px;
         margin-bottom: 5px;
-        background: #FF9C00;
+        background: #ffba4d;
         cursor: pointer;
         position: relative; }
         .container-summoner #summoner-history #match-history li.blue {
           border-right: 4px solid #2C82C9; }
         .container-summoner #summoner-history #match-history li.red {
           border-right: 4px solid #E25041; }
+        .container-summoner #summoner-history #match-history li.active {
+          background: #FF9C00; }
         .container-summoner #summoner-history #match-history li:last-of-type {
           margin-bottom: 0; }
         .container-summoner #summoner-history #match-history li div {

@@ -77,13 +77,15 @@
 				overflow: hidden
 				padding: 2px
 				margin-bottom: 5px
-				background: $mainColor
+				background: lighten($mainColor, 15%)
 				cursor: pointer
 				position: relative
 				&.blue
 					border-right: 4px solid #2C82C9
 				&.red
 					border-right: 4px solid #E25041
+				&.active
+					background: $mainColor
 				&:last-of-type
 					margin-bottom: 0
 

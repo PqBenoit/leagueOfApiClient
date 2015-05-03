@@ -188,5 +188,8 @@
 
 				}
 			};
-
+			$scope.selected;
+			$scope.select = function(key){
+				$scope.selected = key;
+			}
 		});
