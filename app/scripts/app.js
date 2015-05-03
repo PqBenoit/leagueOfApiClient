@@ -21,7 +21,7 @@ angular
         templateUrl: 'views/summoner.html',
         controller: 'SummonerCtrl'
       })
-      .when('/continent', {
+      .when('/status', {
         templateUrl: 'views/continent.html',
         controller: 'ContinentCtrl'
       })

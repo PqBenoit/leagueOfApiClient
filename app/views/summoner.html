@@ -12,6 +12,7 @@
 		</aside>
 
 		<form ng-submit="getSummoner(summoner)">
+			<p>Merci de renseigner votre nom d'invocateur</p>
 			<input type="text" ng-model="summoner.name" id="summoner-name" placeholder="Nom d'invocateur">
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
@@ -20,8 +21,8 @@
 
 	<section id="summoner-history">
 		<ul id="match-history">
-			<h1>10 dernières Games</h1>
-			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" show-game>
+			<h1>10 dernières parties</h1>
+			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '200', blue: game.teamId =='100'}" show-game>
 				<div ng-if="game.stats.win == true">Victoire</div>
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">
@@ -29,7 +30,17 @@
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
 				</div>
-				<p>{{game.subType}}</p>
+				<p class="game-score">
+					<span ng-if="game.stats.championsKilled">{{game.stats.championsKilled}}</span>
+					<span ng-if="!game.stats.championsKilled">0</span>
+					 / 
+					<span ng-if="game.stats.numDeaths">{{game.stats.numDeaths}} </span>
+					<span ng-if="!game.stats.numDeaths">0</span>
+					 / 
+					<span ng-if="game.stats.assists">{{game.stats.assists}} </span>
+					<span ng-if="!game.stats.assists">0</span>
+				</p>
+				<p class="game-type">Type de partie: <strong>{{game.subType}}</strong></p>
 				<!-- <ul class="players">
 					<li ng-repeat="player in game.fellowPlayers">
 
@@ -53,7 +64,7 @@
 
 	<section id="game" class="animate-show opacity-0">
 		<div id="match-resume">
-			<h1>{{match.minuteDuration}} minutes</h1>
+			<h1>Durée: {{match.minuteDuration}} minutes</h1>
 			<section id="first-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants | limitTo: 5">
@@ -61,6 +72,7 @@
 					</li>
 				</ul>
 			</section>
+			<span class="vs">VS</span>
 			<section id="second-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants.slice().reverse() | limitTo: 5">

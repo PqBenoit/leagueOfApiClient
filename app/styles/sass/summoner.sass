@@ -24,7 +24,10 @@
 
 		form
 			height: 5em
-
+			p
+				color: white
+				font-size: 16px 
+				margin: 10px auto
 			input#summoner-name
 				+transition(all ease 0.2s)
 				margin: 0
@@ -58,7 +61,7 @@
 	// Section match history
 	#summoner-history
 		float: left
-		width: 30%
+		width: 325px
 		display: none
 		+opacity(0)
 
@@ -76,6 +79,11 @@
 				margin-bottom: 5px
 				background: $mainColor
 				cursor: pointer
+				position: relative
+				&.blue
+					border-right: 4px solid #2C82C9
+				&.red
+					border-right: 4px solid #E25041
 				&:last-of-type
 					margin-bottom: 0
 
@@ -97,8 +105,16 @@
 
 				p
 					display: inline-block
-					font-size: 8px
+					font-size: 16px
+					margin: 0 10px
+					position: absolute
+					strong 
+						font-weight: bold
 
+				p.game-score
+					bottom: 25px
+				p.game-type
+					bottom: 5px
 
 				ul.players
 					width: 160px
@@ -111,7 +127,7 @@
 		width: 70%
 
 		#timeline
-			background: #AAAAAA
+			// background: #AAAAAA
 			height: 3px
 			line-height: 3px
 			margin-top: 15px 
@@ -124,29 +140,54 @@
 				cursor: pointer
 				display: inline-block
 				margin-right: 5px
+				&:hover
+					background: #FF9C00
 
 		#map-game
 			position: relative
+			text-align: center
 
 			circle
 				cursor: pointer
+		#timeline
+			text-align: center
 
 		#match-resume
-			overflow: hidden
+			// overflow: hidden
+			text-align: center
+			h1
+				font-size: 16px
+				color: white
+				margin: 15px 5px
+				text-align: left
+			.vs
+				font-size: 20px
+				color: white
+				display: inline-block
+				height: 48px
+				line-height: 48px
+				vertical-align: bottom
 
 			#first-team-resume
 				display: inline-block
-
+				border-right: 4px solid #2C82C9
+				height: 48px
 				ul
 					overflow: hidden
 					li
-						border-left: 4px solid #E25041
+						display: inline-block
+						float: left
+						height: auto
+						width: auto
 
 			#second-team-resume
 				display: inline-block
-
+				border-left: 4px solid #E25041
+				height: 48px
 				ul
 					overflow: hidden
 					li
-						border-left: 4px solid #2C82C9
+						display: inline-block
+						height: auto
+						width: auto
 				
