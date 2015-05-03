@@ -105,7 +105,12 @@
         margin-bottom: 5px;
         background: #ffba4d;
         cursor: pointer;
-        position: relative; }
+        position: relative;
+        height: 100px; }
+        .container-summoner #summoner-history #match-history li:after {
+          content: "";
+          display: table;
+          clear: both; }
         .container-summoner #summoner-history #match-history li.blue {
           border-right: 4px solid #2C82C9; }
         .container-summoner #summoner-history #match-history li.red {
@@ -130,16 +135,10 @@
             width: 22px;
             height: 22px; }
         .container-summoner #summoner-history #match-history li p {
-          display: inline-block;
           font-size: 16px;
-          margin: 0 10px;
-          position: absolute; }
+          margin: 0 10px; }
           .container-summoner #summoner-history #match-history li p strong {
             font-weight: bold; }
-        .container-summoner #summoner-history #match-history li p.game-score {
-          bottom: 25px; }
-        .container-summoner #summoner-history #match-history li p.game-type {
-          bottom: 5px; }
         .container-summoner #summoner-history #match-history li ul.players {
           margin-top: 5px;
           width: 25px;
