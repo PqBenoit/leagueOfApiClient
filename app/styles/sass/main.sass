@@ -32,6 +32,7 @@ body
 
 				path:hover 
 					cursor: pointer
+
 	main
 		height: 100%
 		[class*="container-"]
@@ -109,9 +110,26 @@ body
 				border-color: rgba(0,0,0,0.5) transparent transparent 
 
 		.tooltip-map
+			visibility: hidden
 			color: #ffffff
-			padding: 10px
+			height: 5em
+			line-height: 5em
 			background: rgba(0,0,0,0.5)
+			position: absolute
+			left: 0
+			width: 512px
+			top: -5em
+
+		.eventsButton
+			position: absolute
+			top: 0
+			left: 0
+			background: rgba(0,0,0,0.5)
+			color: #ffffff
+			padding: 5px
+			border: none
+			outline: none
+			cursor: pointer
 
 		.clear
 			clear: both

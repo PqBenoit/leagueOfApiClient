@@ -22,7 +22,9 @@
 						// Refresh map data
 						MatchMap.setTimeline();
 			            MatchMap.getParticipantPositions(function(cords){
-				            MatchMap.loadMap(cords);
+			            	MatchMap.getEventPositions(function(cordsEvent){
+				            	MatchMap.loadMap(cords, cordsEvent);
+			            	});
 			            });
 						
 					});

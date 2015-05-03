@@ -17,6 +17,8 @@
           mapBackground: "",
 
           timestamp: 0,
+
+          eventsRendered: false,
           
           /**
            * @function initMap
@@ -46,14 +48,17 @@
               Map.setTimeline();
 
               Map.getParticipantPositions(function(cords){
+                Map.getEventPositions(function(cordsEvent){
+                  Map.loadMap(cords, cordsEvent);
 
-                Map.loadMap(cords);
+                  // Allow to use match data in root scope
+                  data.minuteDuration = Math.floor(data.matchDuration/60);
+                  Helpers.setVarToRootScope('match', data, true);
 
-                // Allow to use match data in root scope
-                data.minuteDuration = Math.floor(data.matchDuration/60);
-                Helpers.setVarToRootScope('match', data, true);
+                  return callback();
+                });
 
-                return callback();
+                
 
               });
 
@@ -61,9 +66,39 @@
 
           },
 
-          getEventsPositions: function (callback)
+          getEventPositions: function (callback)
           {
+            var cords = [];
+            for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
 
+              // Select the frame tha matched with setted timestamp
+              if (Map.matchData.timeline.frames[i].timestamp == Map.timestamp) {
+                var eventsFrame = Map.matchData.timeline.frames[i].events;
+
+                // Check if frames exist
+                if (eventsFrame) {
+
+                  for (var eventId in eventsFrame) {
+                    var positions = eventsFrame[eventId].position;
+                    console.log(eventsFrame[eventId]);
+                    // Check if any positions in this frame
+                    if (positions) {
+                      var eventsInfos = eventsFrame[eventId];
+
+                      // Setup cords array
+                      cords.push({
+                        x: positions.x, 
+                        y: positions.y,
+                        eventsData: eventsInfos, 
+                        type: 'events'
+                      });
+                    }
+                  }
+                }
+              }   
+            }
+
+            return callback(cords);
           },
 
           /**
@@ -76,6 +111,7 @@
           getParticipantPositions: function (callback)
           {
             var cords = [];
+            Map.matchData.participantsInfo = {};
             for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
 
               // Select the frame tha matched with setted timestamp
@@ -92,20 +128,22 @@
                     if (positions) {
                       var participantInfos = participantFrame[participantId];
 
-                      // Setup the champion name
+                      // Setup the some extra infos
                       for (var ii = 0, jj = Map.matchData.participants.length ; ii < jj ; ii++) {
 
                         if (Map.matchData.participants[ii].participantId == participantId) {
+                          Map.matchData.participantsInfo[participantId] = Map.matchData.participants[ii];
                           participantInfos.championName = Map.scope.champInfos.data[Map.matchData.participants[ii].championId].name;
+                          participantInfos.teamId = Map.matchData.participants[ii].teamId;
                         }
 
                       }
 
                       // Setup cords array
                       if (parseInt(participantId) <= 5) {
-                        cords.push({x: positions.x, y: positions.y, team: 1, participantData: participantInfos, type: 'participant'});
+                        cords.push({x: positions.x, y: positions.y, participantData: participantInfos, type: 'participant'});
                       } else {
-                        cords.push({x: positions.x, y: positions.y, team: 2, participantData: participantInfos, type: 'participant'});
+                        cords.push({x: positions.x, y: positions.y, participantData: participantInfos, type: 'participant'});
                       }
                     }
                   }
@@ -120,19 +158,22 @@
            * @function loadMap
            * @memberof root.services.MatchMap
            * @description Create the map with the given events coordiantes
-           * @param {Array} cords, @see root.services.MatchMap.getPositions
+           * @param {Array} cords, @see root.services.MatchMap.getParticipantPositions
+           * @param {Array} cordsEvent, @see root.services.MatchMap.getEventPositions
            * @see d3.js
            *
            * @returns {Void}
            */
-          loadMap: function (cords)
+          loadMap: function (cords, cordsEvent)
           {
+            Map.eventsRendered = false;
+
             var map = document.getElementById('map-game');
             map.innerHTML = "";
         
             var domain = {
-                        min: {x: -570, y: -420},
-                        max: {x: 15220, y: 14980}
+                        min: {x: -1000, y: -570},
+                        max: {x: 14800, y: 14800}
                 },
                 width = 512,
                 height = 512,
@@ -156,11 +197,21 @@
                 .attr("width", width)
                 .attr("height", height);
 
-            var tooltip = d3.select("#map-game")
-                  .append("div")
-                  .style("position", "absolute")
-                  .style("z-index", "10")
-                  .style("visibility", "hidden");
+            var map = document.getElementById('map-game');
+            var tooltip = document.createElement('div');
+            tooltip.className = 'tooltip-map';
+            map.appendChild(tooltip);
+
+            var buttonEvents = d3.select('#map-game').append('button')
+                .attr('class', 'eventsButton')
+                .html('Voir/cacher les évènements')
+                .on("click", function(){
+                      if (Map.eventsRendered === false) {
+                        Map.renderEvents(cordsEvent, svg, xScale, yScale, tooltip);
+                      } else {
+                        Map.removeEvents(svg);
+                      }
+                });
 
             svg.append('image')
                 .attr('xlink:href', bg)
@@ -172,7 +223,7 @@
             
             for (var i = 0, j = Map.matchData.participants.length ; i < j ; i++) {
                 svg.append('def')
-                    .attr('id', 'avatar')
+                    .attr('class', 'avatar')
                     .append('pattern')
                       .attr('id', 'p-'+Map.matchData.participants[i].participantId)
                       .attr('x', '0')
@@ -194,7 +245,7 @@
                     .attr('cy', function(d) { return yScale(d.y) })
                     .attr('r', 12)
                     .attr('stroke', function(d) {
-                      if (d.team == 1) {
+                      if (d.participantData.teamId == 100) {
                         return '#E25041';
                       } else {
                         return '#2C82C9';
@@ -205,24 +256,100 @@
                         return 'url(#p-'+d.participantData.participantId+')';
                     })
                     .attr('class', 'kills')
-                    .on("mouseover", function(){
-                      return tooltip.style("visibility", "visible");
-                    })
-                    .on("mousemove", function(d){
-                      if (d.type === 'participant') {
-                        return tooltip.style("top", "0")
-                                    .style("left","0")
-                                    .attr('class', 'tooltip-map')
-                                    .html(d.participantData.championName+"<br>level: "+d.participantData.level);
-                      }
-                      
+                    .on("mouseover", function(d){
+                      tooltip.style.visibility = 'visible';
+                      tooltip.innerHTML = d.participantData.championName+" | level: "+d.participantData.level;
                     })
                     .on("mouseout", function(){
-                      return tooltip.style("visibility", "hidden");
-                    })
-                    .on("click", function(){
-                      
+                      return tooltip.style.visibility = "hidden";
                     });
+          },
+
+          renderEvents: function (cordsEvent, svg, xScale, yScale, tooltip)
+          {
+            Map.eventsRendered = true;
+            svg.append('def')
+                    .attr('class', 'icons')
+                    .append('pattern')
+                      .attr('id', 'close-icon')
+                      .attr('x', '0')
+                      .attr('y', '0')
+                      .attr('width', 30)
+                      .attr('height', 30);
+
+            svg.append('def')
+                    .attr('class', 'icons')
+                    .append('pattern')
+                      .attr('id', 'tower-icon')
+                      .attr('x', '0')
+                      .attr('y', '0')
+                      .attr('width', 30)
+                      .attr('height', 30);
+
+            svg.select("#tower-icon")
+                .append('rect')
+                  .attr('fill', '#000000')
+                  .attr('width', 30)
+                  .attr('height', 30);
+            svg.select("#close-icon")
+                .append('rect')
+                  .attr('fill', '#000000')
+                  .attr('width', 30)
+                  .attr('height', 30);
+
+            svg.select("#tower-icon")
+                .append('image')
+                  .attr('xlink:href', '../../images/appbar.chess.rook.png')
+                  .attr('x', '-2.5')
+                  .attr('y', '-2.5')
+                  .attr('width', 30)
+                  .attr('height', 30);
+            svg.select("#close-icon")
+                .append('image')
+                  .attr('xlink:href', '../../images/appbar.close.png')
+                  .attr('x', '-2.5')
+                  .attr('y', '-2.5')
+                  .attr('width', 30)
+                  .attr('height', 30);
+
+            svg.append('svg:g').selectAll("circle")
+                        .data(cordsEvent)
+                        .enter().append("svg:circle")
+                            .attr('cx', function(de) { return xScale(de.x) })
+                            .attr('cy', function(de) { return yScale(de.y) })
+                            .attr('r', 12)
+                            .attr('class', 'eventCircles')
+                            .attr('stroke', function(de) {
+                              if ((de.eventsData.teamId && de.eventsData.teamId <= 100) || (de.eventsData.victimId && de.eventsData.victimId < 5)) {
+                                return '#E25041';
+                              } else {
+                                return '#2C82C9';
+                              }
+                            })
+                            .attr('fill', function(de) {
+                                if (de.eventsData.eventType === 'CHAMPION_KILL') {
+                                  return 'url(#close-icon)';
+                                } else if (de.eventsData.eventType === 'BUILDING_KILL') {
+                                  return 'url(#tower-icon)';
+                                }
+                            })
+                            .on("mouseover", function(de){
+                              tooltip.style.visibility = 'visible';
+                              if (de.eventsData.eventType === 'CHAMPION_KILL') {
+                                tooltip.innerHTML = 'victime: '+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.victimId].championId].name+" | Tueur: "+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.killerId].championId].name;
+                              } else if (de.eventsData.eventType === 'BUILDING_KILL'){
+                                tooltip.innerHTML = 'Tourelle détruite par: '+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.killerId].championId].name;
+                              }
+                            })
+                            .on("mouseout", function(){
+                              return tooltip.style.visibility = "hidden";
+                            });
+          },
+
+          removeEvents: function (svg)
+          {
+            Map.eventsRendered = false;
+            svg.selectAll('.eventCircles').remove();
           },
 
           /**
