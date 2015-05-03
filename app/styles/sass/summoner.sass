@@ -24,7 +24,10 @@
 
 		form
 			height: 5em
-
+			p
+				color: white
+				font-size: 16px 
+				margin: 10px auto
 			input#summoner-name
 				+transition(all ease 0.2s)
 				margin: 0
@@ -58,7 +61,7 @@
 	// Section match history
 	#summoner-history
 		float: left
-		width: 30%
+		width: 325px
 		display: none
 		+opacity(0)
 
@@ -74,22 +77,32 @@
 				overflow: hidden
 				padding: 2px
 				margin-bottom: 5px
-				background: $mainColor
+				background: lighten($mainColor, 15%)
 				cursor: pointer
+				position: relative
+				&.blue
+					border-right: 4px solid #2C82C9
+				&.red
+					border-right: 4px solid #E25041
+				&.active
+					background: $mainColor
 				&:last-of-type
 					margin-bottom: 0
 
+				div
+					display: inline-block
+
 				div.imgs
-					margin-right: 2px
 					float: left
+					margin-right: 5px
 					img
 						background: $secondColor
 						
 					img.champ
 						display: flex
-						width: 48px
-						height: 48px
-
+						width: 55px
+						height: 55px
+						
 					img.spell
 						margin-top: 2px
 						width: 22px
@@ -97,21 +110,61 @@
 
 				p
 					display: inline-block
-					font-size: 8px
+					font-size: 16px
+					margin: 0 10px
+					position: absolute
+					strong 
+						font-weight: bold
 
+				p.game-score
+					bottom: 25px
+				p.game-type
+					bottom: 5px
 
 				ul.players
+					margin-top: 5px
+					width: 25px
+					height: 25px
+					p
+						display: inline-block
+						font-size: 8px
+
+				div.scoreAndItems
+					padding: 2px
+					float: center
+
+					p
+						padding-bottom: 3px
+
+				div.players
+					padding: 2px
+					float: right
 					width: 160px
 					height: 80px
-					float: right
-					border: 2px $secondColor solid
+					
+					ul
+						li
+							width: 50%
+							display: inline-block
+							margin-bottom: 2px
+							padding: 0px
+
+							p
+								width: 100%
+								text-align: center
+								font-size: 8px
+								
+							p.firstteam
+
+							p.secondteam
 
 	#game
 		float: left
 		width: 70%
-
+		display: inline-block
+		width: 60%
 		#timeline
-			background: #AAAAAA
+			// background: #AAAAAA
 			height: 3px
 			line-height: 3px
 			margin-top: 15px 
@@ -124,29 +177,75 @@
 				cursor: pointer
 				display: inline-block
 				margin-right: 5px
+				&:hover
+					background: #FF9C00
 
 		#map-game
 			position: relative
+			text-align: center
 
 			circle
 				cursor: pointer
+		#timeline
+			text-align: center
 
 		#match-resume
-			overflow: hidden
+			// overflow: hidden
+			text-align: center
+			h1
+				font-size: 16px
+				color: white
+				margin: 15px 5px
+				text-align: left
+			.vs
+				font-size: 20px
+				color: white
+				display: inline-block
+				height: 48px
+				line-height: 48px
+				vertical-align: bottom
 
 			#first-team-resume
 				display: inline-block
-
+				border-right: 4px solid #2C82C9
+				height: 48px
 				ul
 					overflow: hidden
 					li
-						border-left: 4px solid #E25041
+						display: inline-block
+						float: left
+						height: auto
+						width: auto
 
 			#second-team-resume
 				display: inline-block
-
+				border-left: 4px solid #E25041
+				height: 48px
 				ul
 					overflow: hidden
 					li
-						border-left: 4px solid #2C82C9
-				
+						display: inline-block
+						height: auto
+						width: auto
+
+.player-stats
+	padding: 20px 0
+	+opacity(0)
+	h1
+		color: white
+		font-size: 26px
+		text-align: center
+		margin: 10px 0
+	ul
+		margin-top: 20px
+		&:after
+			content: ''
+			display: table
+			clear: both
+		li
+			padding: 0 10px
+			height: 50px
+			width: 280px
+			color: white
+			display: inline-block
+			float: left

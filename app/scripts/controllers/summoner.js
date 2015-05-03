@@ -21,7 +21,8 @@
 			 */
 			var fullScreenSummonerForm = document.getElementById('summoner-form');
 			fullScreenSummonerForm.style.display = 'block';
-
+			var summonerStats = document.getElementById('summoner-stats');
+			summonerStats.style.display = 'none';
 			/** 
 			 * @var {HTMLElement} SummonerMatchHistory 
 			 * @memberOf root.controllers.SummonerCtrl
@@ -167,7 +168,9 @@
 										fullScreenSummonerForm.style.display = 'none';
 										
 										SummonerMatchHistory.style.display = 'block';
+										summonerStats.style.display = 'block';
 										Velocity(SummonerMatchHistory, {opacity: 1, duration: 1000});
+										Velocity(summonerStats, {opacity: 1, duration: 1000});
 									});
 
 								});
@@ -188,5 +191,8 @@
 
 				}
 			};
-
+			$scope.selected;
+			$scope.select = function(key){
+				$scope.selected = key;
+			}
 		});

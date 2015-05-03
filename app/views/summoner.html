@@ -12,30 +12,65 @@
 		</aside>
 
 		<form ng-submit="getSummoner(summoner)">
+			<p>Merci de renseigner votre nom d'invocateur</p>
 			<input type="text" ng-model="summoner.name" id="summoner-name" placeholder="Nom d'invocateur">
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
-
 	</div>
 
+	<div class="player-stats" id="summoner-stats">
+		<h1>Statistiques globales du joueur:</h1>
+		<ul>
+			<li ng-repeat="(key, gameMode) in statsResults.playerStatSummaries">
+				<h2>{{gameMode.playerStatSummaryType}}</h2>
+				<p>Victoires: {{gameMode.wins}}</p>
+			</li>
+		</ul>
+	</div>
 	<section id="summoner-history">
+
 		<ul id="match-history">
-			<h1>10 dernières Games</h1>
-			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" show-game>
+			<h1>10 dernières parties</h1>
+			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '200', blue: game.teamId =='100', active: $index == selected}" ng-click="select(key)" show-game>
 				<div ng-if="game.stats.win == true">Victoire</div>
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
+
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show champ" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
 				</div>
-				<p>{{game.subType}}</p>
+				<div class="scoreAndItems">
+					<p class="game-score">
+						<span ng-if="game.stats.championsKilled">{{game.stats.championsKilled}}</span>
+						<span ng-if="!game.stats.championsKilled">0</span>
+						 / 
+						<span ng-if="game.stats.numDeaths">{{game.stats.numDeaths}} </span>
+						<span ng-if="!game.stats.numDeaths">0</span>
+						 / 
+						<span ng-if="game.stats.assists">{{game.stats.assists}} </span>
+						<span ng-if="!game.stats.assists">0</span>
+					</p>
+<!-- 					<div>
+						<p>{{game.stats.item0}} {{game.stats.item1}} {{game.stats.item2}}</p>
+						<p>{{game.stats.item3}} {{game.stats.item4}} {{game.stats.item5}}</p>
+					</div> -->
+				</div>
+				<p class="game-type">Type de partie: <strong>{{game.subType}}</strong></p>
 				<!-- <ul class="players">
 					<li ng-repeat="player in game.fellowPlayers">
-
-						<p>{{player.summonerId}}</p>
-					</li>
-				</ul> -->
+				<!-- <p style="display: none;"><a href="">{{game.gameId}}</a></p> -->
+				<!-- <p>{{game.subType}}</p> -->
+<!-- 				<div class="players">
+					<ul>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '100'">
+							<p class="firstteam" >{{player.summonerId}}</p>
+						</li>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '200'">
+							<p class="secondteam" >{{player.summonerId}}</p>
+						</li>
+					</ul>
+				</div> -->
 			</li>
 		</ul>
 <!-- 		<br>
@@ -53,7 +88,7 @@
 
 	<section id="game" class="animate-show opacity-0">
 		<div id="match-resume">
-			<h1>{{match.minuteDuration}} minutes</h1>
+			<h1>Durée: {{match.minuteDuration}} minutes</h1>
 			<section id="first-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants | limitTo: 5">
@@ -61,6 +96,7 @@
 					</li>
 				</ul>
 			</section>
+			<span class="vs">VS</span>
 			<section id="second-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants.slice().reverse() | limitTo: 5">
@@ -72,8 +108,6 @@
 		<div id="map-game">
 		</div>
 		<div id="timeline">
-		</div>
-		<div id="timeline-events">
 		</div>
 	</section>
 

@@ -1,5 +1,6 @@
 @import "partials/vars"
 @import "partials/mixins"
+@import url("http://fonts.googleapis.com/css?family=Basic")
 +reset
 
 *
@@ -9,7 +10,7 @@ html
 	height: 100%
 body
 	height: 100%
-	font-family: arial, sans-serif
+	font-family: 'Basic', arial, sans-serif
 
 	.ng-scope
 		height: 100%
@@ -21,7 +22,16 @@ body
 			background: url(../../images/bg/bg-map.png)
 			position: relative
 			display: table
-
+			h1
+				color: white
+				text-align: center
+				font-size: 48px
+				font-family: 'Basic'
+				margin: 20px auto
+			p
+				text-align: center
+				color: white
+				font-family: 16px
 			#svg-container
 				width: 1013px
 				height: 669px
