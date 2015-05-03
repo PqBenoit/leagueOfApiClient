@@ -31,7 +31,7 @@
 
 		<ul id="match-history">
 			<h1>10 dernières parties</h1>
-			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '200', blue: game.teamId =='100', active: $index == selected}" ng-click="select(key)" show-game>
+			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '100', blue: game.teamId =='200', active: $index == selected}" ng-click="select(key)" show-game>
 				<div ng-if="game.stats.win == true">Victoire</div>
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">

@@ -208,7 +208,7 @@
         vertical-align: bottom; }
       .container-summoner #game #match-resume #first-team-resume {
         display: inline-block;
-        border-right: 4px solid #2C82C9;
+        border-right: 4px solid #E25041;
         height: 48px; }
         .container-summoner #game #match-resume #first-team-resume ul {
           overflow: hidden; }
@@ -219,7 +219,7 @@
             width: auto; }
       .container-summoner #game #match-resume #second-team-resume {
         display: inline-block;
-        border-left: 4px solid #E25041;
+        border-left: 4px solid #2C82C9;
         height: 48px; }
         .container-summoner #game #match-resume #second-team-resume ul {
           overflow: hidden; }
