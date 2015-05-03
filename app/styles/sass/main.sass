@@ -13,8 +13,11 @@ body
 	font-family: 'Basic', arial, sans-serif
 
 	.ng-scope
+
+	main
 		height: 100%
-		width: 100%
+		[class*="container-"]
+			height: 100%
 
 		#map
 			height: 100%
@@ -42,6 +45,94 @@ body
 
 				path:hover 
 					cursor: pointer
+
+			#info-container
+				position: absolute
+				bottom: 0
+				left: 0
+				width: 100%
+				height: 40px
+
+				.relative-container
+					position: relative
+					width: 100%
+					height: 40px
+
+					#loader-info
+						display: none
+						position: absolute
+						top: 0
+						left: 50%
+						margin-left: -15px
+						width: 30px
+						height: 2px
+						background: #FF9C00
+						-webkit-animation: loading 1s infinite ease-in
+
+					#left-part
+						overflow: hidden
+						position: absolute
+						width: 0%
+						height: 40px
+						top: 0
+						right: 50%
+						border-top: solid 2px #FF9C00
+						-webkit-transition: width 0.3s ease-out
+
+						#region
+							right: 30px
+
+						#img-c
+							position: absolute
+							left: 0
+
+							img
+								width: 40px
+								height: 40px
+
+					#right-part
+						overflow: hidden
+						position: absolute
+						left: 50%
+						top: 0
+						height: 40px
+						width: 0% 
+						border-top: solid 2px #FF9C00
+						-webkit-transition: width 0.3s ease-out
+
+						span
+							position: absolute
+							color: #FF9C00
+							font-size: 24px
+							padding-top: 10px
+
+						#region
+							left: 140px
+
+						#status
+							left: 340px
+
+
+
+			.info-container-loading, .NaN
+				#loader-info
+					display: inline-block !important
+
+				#loader-info
+					display: inline-block !important
+
+
+			.info-container-active
+
+				.relative-container
+
+					#left-part
+						width: 50% !important
+						-webkit-transition: width 0.3s ease-out
+
+					#right-part
+						width: 50% !important
+						-webkit-transition: width 0.3s ease-out
 
 	main
 		height: 100%
@@ -122,18 +213,23 @@ body
 		.tooltip-map
 			visibility: hidden
 			color: #ffffff
-			height: 5em
-			line-height: 5em
+			height: 20px
+			line-height: 20px
 			background: rgba(0,0,0,0.5)
 			position: absolute
 			left: 0
+			right: 0
+			margin: auto
 			width: 512px
-			top: -5em
+			top: 0
 
 		.eventsButton
 			position: absolute
-			top: 0
+			bottom: -60px
 			left: 0
+			right: 0
+			margin: auto
+			width: 200px
 			background: rgba(0,0,0,0.5)
 			color: #ffffff
 			padding: 5px
@@ -155,4 +251,15 @@ body
 	div.flash-errors
 		background: $secondColor
 		color: #ffffff
-  
+
+@-webkit-keyframes loading
+	0%
+		width: 50px
+		margin-left: -25px
+	50%
+		width: 0px
+		margin-left: 0
+	100%
+		width: 50px
+		margin-left: -25px
+

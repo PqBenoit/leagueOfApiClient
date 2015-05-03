@@ -80,6 +80,11 @@
 				background: lighten($mainColor, 15%)
 				cursor: pointer
 				position: relative
+				height: 100px
+				&:after
+					content: ''
+					display: table
+					clear: both
 				&.blue
 					border-right: 4px solid #2C82C9
 				&.red
@@ -109,17 +114,16 @@
 						height: 22px
 
 				p
-					display: inline-block
 					font-size: 16px
 					margin: 0 10px
-					position: absolute
+					// position: absolute
 					strong 
 						font-weight: bold
 
-				p.game-score
-					top: 20px
-				p.game-type
-					top: 30px
+				// p.game-score
+				// 	top: 20px
+				// p.game-type
+				// 	top: 30px
 
 				ul.players
 					margin-top: 5px
@@ -207,7 +211,7 @@
 
 			#first-team-resume
 				display: inline-block
-				border-right: 4px solid #2C82C9
+				border-right: 4px solid #E25041
 				height: 48px
 				ul
 					overflow: hidden
@@ -219,7 +223,7 @@
 
 			#second-team-resume
 				display: inline-block
-				border-left: 4px solid #E25041
+				border-left: 4px solid #2C82C9
 				height: 48px
 				ul
 					overflow: hidden

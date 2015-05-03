@@ -2,7 +2,20 @@
   <h1>Player of Legends</h1>
   <p>Sélectionner votre pays</p>
 	<div id="svg-container"></div>
+	<div id="info-container">
+		<div class="relative-container">
+			<div id="loader-info"></div>
+			<div id="left-part">
+				<div class="relative-container">
+					<div id="img-c">
+						<img ng-repeat="name in nameArray track by $index" src="http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{name}}">
+					</div>
+				</div>
+			</div>
+			<div id="right-part">
+				<span id="region">{{region}}</span>
+				<span id="status">online</span>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- <div id="loader">
-  	<div class="loader-content"></div>
-</div> -->
