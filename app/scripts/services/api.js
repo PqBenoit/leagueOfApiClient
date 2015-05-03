@@ -18,6 +18,7 @@
 	        	 * @var APIKey
 	        	 * @memberof root.services.API
 	        	 * @description League of Legend API Key
+	        	 * @public
 	        	 */
 	        	APIKey: '',
 
@@ -25,6 +26,7 @@
 	        	 * @var baseUrlStaticData
 	        	 * @memberof root.services.API
 	        	 * @description base url for League of Legend API statis data
+	        	 * @public
 	        	 */
 	        	baseUrlStaticData: 'https://global.api.pvp.net/api/lol/static-data/',
 
@@ -32,6 +34,7 @@
 	        	 * @var versionSaticData
 	        	 * @memberof root.services.API
 	        	 * @description League of Legend API statis data version
+	        	 * @public
 	        	 */
 	        	versionSaticData: 'v1.2',
 
@@ -39,6 +42,7 @@
 	        	 * @var region
 	        	 * @memberof root.services.API
 	        	 * @description The region for lol api
+	        	 * @public
 	        	 * @see {@link config}
 	        	 */
 	        	region: '',
@@ -49,6 +53,7 @@
 	        	 * @description Init some config
 	        	 * @param {String} apiKey
 	        	 * @param {String} region
+	        	 * @public
 	        	 *
 	        	 * @returns {Void}
 	        	 */
@@ -66,8 +71,9 @@
 	        	 * @param {Array} params
 	        	 * @param {string} fields
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
-	        	 * @returns {Function} Callback(JSON||null)
+	        	 * @returns {Function} Callback(Namespace||null)
 	        	 */
 	            get: function (model, params, fields, callback) 
 	            {
@@ -112,8 +118,10 @@
 	        	 * @param {String} model
 	        	 * @param {Int} id
 	        	 * @param {string} fields, comma-sparated
+	        	 * @param {callback} callback
+	        	 * @public
 	        	 *
-	        	 * @returns {Function} Callback(JSON||null)
+	        	 * @returns {Function} Callback(Namespace||null)
 	             */
 	            getStaticData: function (model, id, fields, callback) 
 	            {
@@ -149,6 +157,7 @@
 	        	 * @memberof root.services.API
 	        	 * @description Sends get method to LOL API
 	        	 * @param {String} region
+	        	 * @public
 	        	 *
 	        	 * @return {JSON} result for get request
 	        	 */
@@ -161,6 +170,7 @@
 	             * @memberof root.services.API
 	        	 * @description Send get method to lol CDN. 
 	        	 * @param {String} target
+	        	 * @public
 	        	 *
 	        	 * @returns {String} src
 	             */
@@ -177,6 +187,7 @@
 	        	 * @description Get a summoner by his name
 	        	 * @param {String} summonerName
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
@@ -194,6 +205,7 @@
 	        	 * @description Get summoner's games by his id
 	        	 * @param {Array} params
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
@@ -211,6 +223,7 @@
 	        	 * @param {Array} params
 	        	 * @param {Boolean} includeTimeline
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
@@ -227,6 +240,7 @@
 	        	 * @description Get summoner's stats by his id
 	        	 * @param {Array} params
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */
@@ -244,6 +258,7 @@
 	        	 * @param {Int} champId
 	        	 * @param {String} fields, comma-separated
 	        	 * @param {Function} callback
+	        	 * @public
 	        	 *
 	        	 * @returns {Function} Callback(JSON||null)
 	        	 */

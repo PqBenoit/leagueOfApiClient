@@ -2,7 +2,7 @@
 
 /**
   * @class root.directives.refreshGame
-  * @description Show a game details on click
+  * @description Refresh map infos on timeline click
   */
  angular
  	.module('leagueOfApp')

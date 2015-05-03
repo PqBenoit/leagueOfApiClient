@@ -2,7 +2,7 @@
 
 /**
   * @class root.directives.showGame
-  * @description Show a game details on click
+  * @description tooltip for timeline hover
   */
  angular
  	.module('leagueOfApp')

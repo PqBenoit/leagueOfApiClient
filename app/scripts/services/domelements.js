@@ -17,6 +17,7 @@
              * @var loaderHTML
              * @memberof root.services.DOMElements
              * @description HTML element for the loader
+             * @public
              */
             loaderHTML: null,
 
@@ -24,6 +25,7 @@
              * @var messageHTML
              * @memberof root.services.DOMElements
              * @description HTML element for flash message
+             * @public
              */
             messageHTML: null,
 
@@ -31,6 +33,7 @@
              * @var tooltipHTML
              * @memberof root.services.DOMElements
              * @description HTML element for tooltip
+             * @public
              */
             tooltipHTML: null,
             
@@ -39,6 +42,7 @@
              * @memberof root.services.DOMElements
              * @description Init the loader, set the HTML element and hide it by default.
              * @param {HTMLElement} element
+             * @public
              *
              * @returns {Void}
              */
@@ -52,6 +56,7 @@
              * @function startLoader
              * @memberof root.services.DOMElements
              * @description Start the loader animation
+             * @public
              *
              * @returns {Void}
              */
@@ -64,6 +69,7 @@
              * @function stopLoader
              * @memberof root.services.DOMElements
              * @description hide the loader
+             * @public
              *
              * @returns {Void}
              */
@@ -78,6 +84,7 @@
              * @description Set the message, and display it.
              * @param {string} message
              * @param {string} type (errors, infos, warnings, default)
+             * @public
              *
              * @returns {Void}
              */
@@ -99,6 +106,7 @@
              * @param {string} message
              * @param {string} type (errors, infos, warnings, default)
              * @param {int} displayTime, time to display flash message in ms
+             * @public
              *
              * @returns {Void}
              */
@@ -120,6 +128,7 @@
              * @function removeFlashMessage
              * @memberof root.services.DOMElements
              * @description Remove it
+             * @public
              *
              * @returns {Void}
              */
@@ -136,6 +145,7 @@
              * @memberof root.services.DOMElements
              * @description set up the tooltip HTMLElement
              * @param {HTMLElement} parentElement
+             * @public
              *
              * @returns {Void}
              */
@@ -156,6 +166,14 @@
               parentElement.appendChild(this.tooltipHTML);
             },
 
+            /**
+             * @function removeTooltip
+             * @memberof root.services.DOMElements
+             * @description remove the tooltip HTMLElement of DOM
+             * @public
+             *
+             * @returns {Void}
+             */
             removeTooltip: function ()
             {
               this.tooltipHTML.remove();

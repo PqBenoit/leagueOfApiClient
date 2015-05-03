@@ -12,21 +12,43 @@
 
         var Map = {
 
+          /** 
+           * @var {Namespace} matchData 
+           * @memberOf root.services.matchMap
+           * @public
+           */
           matchData: {},
 
+          /** 
+           * @var {String} mapBackground 
+           * @memberOf root.services.matchMap
+           * @public
+           */
           mapBackground: "",
 
+          /** 
+           * @var {Int} timestamp 
+           * @memberOf root.services.matchMap
+           * @public
+           */
           timestamp: 0,
 
+          /** 
+           * @var {Boolean} eventsRendered 
+           * @memberOf root.services.matchMap
+           * @public
+           */
           eventsRendered: false,
           
           /**
            * @function initMap
-           * @memberof root.services.MatchMap
+           * @memberof root.services.matchMap
            * @description Init LOL map
            * @param {int} gameId
            * @param {int} timestamp
+           * @param {$scope} scope
            * @param {function} callback
+           * @public
            *
            * @returns {function}
            */
@@ -36,9 +58,9 @@
             Map.scope = scope;
 
             if (gameMode == 'ARAM') {
-              Map.mapBackground = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/map/map12.png "
+              Map.mapBackground = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/map/map12.png ";
             } else {
-              Map.mapBackground = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/map/map1.png "
+              Map.mapBackground = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/map/map1.png ";
             }
 
             // Build cords Array
@@ -58,14 +80,21 @@
                   return callback();
                 });
 
-                
-
               });
 
             });
 
           },
 
+          /**
+           * @function getEventPositions
+           * @memberof root.services.matchMap
+           * @description set up an array for events coordinates
+           * @param {function} callback
+           * @public
+           *
+           * @returns {function}
+           */
           getEventPositions: function (callback)
           {
             var cords = [];
@@ -80,9 +109,9 @@
 
                   for (var eventId in eventsFrame) {
                     var positions = eventsFrame[eventId].position;
-                    console.log(eventsFrame[eventId]);
                     // Check if any positions in this frame
                     if (positions) {
+                      console.log(eventsFrame[eventId]);
                       var eventsInfos = eventsFrame[eventId];
 
                       // Setup cords array
@@ -102,9 +131,11 @@
           },
 
           /**
-           * @function getPositions
+           * @function getParticipantPositions
            * @memberof root.services.MatchMap
-           * @description set up an array for events coordinates
+           * @description set up an array for participants coordinates
+           * @param {function} callback
+           * @public
            *
            * @returns {Void}
            */
@@ -161,6 +192,7 @@
            * @param {Array} cords, @see root.services.MatchMap.getParticipantPositions
            * @param {Array} cordsEvent, @see root.services.MatchMap.getEventPositions
            * @see d3.js
+           * @public
            *
            * @returns {Void}
            */
@@ -265,6 +297,17 @@
                     });
           },
 
+          /**
+           * @function renderEvents
+           * @memberof root.services.MatchMap
+           * @description Render events on map
+           * @param {Array} cords, @see root.services.MatchMap.getParticipantPositions
+           * @param {Array} cordsEvent, @see root.services.MatchMap.getEventPositions
+           * @see d3.js
+           * @public
+           *
+           * @returns {Void}
+           */
           renderEvents: function (cordsEvent, svg, xScale, yScale, tooltip)
           {
             Map.eventsRendered = true;
@@ -346,6 +389,16 @@
                             });
           },
 
+          /**
+           * @function removeEvents
+           * @memberof root.services.MatchMap
+           * @description Remove events on map
+           * @param {d3.js} svg
+           * @see d3.js
+           * @public
+           *
+           * @returns {Void}
+           */
           removeEvents: function (svg)
           {
             Map.eventsRendered = false;
@@ -356,38 +409,11 @@
            * @function setTimeline
            * @memberof root.services.MatchMap
            * @description Create the timeline, each timeline frames given by lol api 'match' make a part of the timeline
+           * @public
            *
            * @returns {Void}
            */
           setTimeline: function ()
-          {
-            var timeline = document.getElementById('timeline');
-            timeline.innerHTML = "";
-            
-            for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
-              var frame = Map.matchData.timeline.frames[i];
-              var timePoint = document.createElement('p');
-
-              timePoint.setAttribute('data-timestamp', frame.timestamp);
-              timePoint.setAttribute('refresh-map', '');
-              timePoint.setAttribute('timeline-tooltip', '');
-              timePoint.className = 'timeline-point';
-
-              timeline.appendChild(timePoint);
-              // To make directive, etc ready !
-              timePoint = $compile(timePoint)(Map.scope);
-            }
-
-          },
-
-          /**
-           * @function setTimelineEvents
-           * @memberof root.services.MatchMap
-           * @description Create the timeline, each timeline frames given by lol api 'match' make a part of the timeline
-           *
-           * @returns {Void}
-           */
-          setTimelineEvents: function ()
           {
             var timeline = document.getElementById('timeline');
             timeline.innerHTML = "";

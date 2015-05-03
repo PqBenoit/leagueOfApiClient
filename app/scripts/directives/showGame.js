@@ -2,7 +2,7 @@
 
 /**
   * @class root.directives.showGame
-  * @description Show a game details on click
+  * @description Set up game section on click
   */
  angular
  	.module('leagueOfApp')

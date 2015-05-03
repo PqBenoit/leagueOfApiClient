@@ -18,14 +18,23 @@
 			/** 
 			 * @var {HTMLElement} fullScreenSummonerForm 
 			 * @memberOf root.controllers.SummonerCtrl
+			 * @private
 			 */
 			var fullScreenSummonerForm = document.getElementById('summoner-form');
 			fullScreenSummonerForm.style.display = 'block';
+
+			/** 
+			 * @var {HTMLElement} summonerStats 
+			 * @memberOf root.controllers.SummonerCtrl
+			 * @private
+			 */
 			var summonerStats = document.getElementById('summoner-stats');
 			summonerStats.style.display = 'none';
+
 			/** 
 			 * @var {HTMLElement} SummonerMatchHistory 
 			 * @memberOf root.controllers.SummonerCtrl
+			 * @private
 			 */
 			var SummonerMatchHistory = document.getElementById('summoner-history');
 
@@ -34,6 +43,7 @@
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set champion image infos in scope
 			 * @param {Function} callback
+			 * @private
 			 *
 			 * @returns {Void}
 			 */
@@ -52,6 +62,7 @@
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set champion infos in scope
 			 * @param {Function} callback
+			 * @private
 			 *
 			 * @returns {Void}
 			 */
@@ -70,6 +81,7 @@
 			 * @memberof root.controllers.SummonerCtrl
 			 * @description Set spell images info in scope
 			 * @param {Function} callback
+			 * @private
 			 *
 			 * @returns {Void}
 			 */
@@ -90,6 +102,7 @@
 			 * @description Get summoner's stats by his id
 			 * @param {int} summoner id
 			 * @param {Function} callback
+			 * @private
 			 * 
 			 * @returns {Void}
 			 */
@@ -110,6 +123,7 @@
 			 * @description Get summoner's games by his id
 			 * @param {int} summoner id
 			 * @param {Function} callback
+			 * @private
 			 * 
 			 * @returns {Void}
 			 */
@@ -138,6 +152,7 @@
 			 * @memberOf root.controllers.SummonerCtrl
 			 * @description Get a summoner id by his name in LOL API
 			 * @param {string} summoner, the LOL player name
+			 * @public
 			 * 
 			 * @returns {Void}
 			 */

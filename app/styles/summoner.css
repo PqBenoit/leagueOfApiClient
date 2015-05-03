@@ -137,9 +137,9 @@
           .container-summoner #summoner-history #match-history li p strong {
             font-weight: bold; }
         .container-summoner #summoner-history #match-history li p.game-score {
-          bottom: 25px; }
+          top: 20px; }
         .container-summoner #summoner-history #match-history li p.game-type {
-          bottom: 5px; }
+          top: 30px; }
         .container-summoner #summoner-history #match-history li ul.players {
           margin-top: 5px;
           width: 25px;
