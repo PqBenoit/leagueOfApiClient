@@ -143,6 +143,18 @@
 	                			return callback(null);
 	                	});
 	            },
+	            
+	        	/**
+	        	 * @function get
+	        	 * @memberof root.services.API
+	        	 * @description Sends get method to LOL API
+	        	 * @param {String} region
+	        	 *
+	        	 * @return {JSON} result for get request
+	        	 */
+	            getStatus: function(region){
+	            	return $http.get('http://status.leagueoflegends.com/shards/'+region);
+	            },
 
 	            /**
 	             * @function getAssets
