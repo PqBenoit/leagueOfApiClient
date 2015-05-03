@@ -25,17 +25,31 @@
 				<div ng-if="game.stats.win == true">Victoire</div>
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show" fade-in>
-				</div>
-				<p>{{game.subType}}</p>
-				<!-- <ul class="players">
-					<li ng-repeat="player in game.fellowPlayers">
 
-						<p>{{player.summonerId}}</p>
-					</li>
-				</ul> -->
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show champ" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+				</div>
+				<div class="scoreAndItems">
+					<p>{{game.stats.championsKilled}} / {{game.stats.numDeaths}} / {{game.stats.assists}}</p>
+					<div>
+						<p>{{game.stats.item0}} {{game.stats.item1}} {{game.stats.item2}}</p>
+						<p>{{game.stats.item3}} {{game.stats.item4}} {{game.stats.item5}}</p>
+					</div>
+				</div>
+				<!-- <p style="display: none;"><a href="">{{game.gameId}}</a></p> -->
+				<!-- <p>{{game.subType}}</p> -->
+				<div class="players">
+					<ul>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '100'">
+							<p class="firstteam" >{{player.summonerId}}</p>
+						</li>
+						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '200'">
+							<p class="secondteam" >{{player.summonerId}}</p>
+						</li>
+					</ul>
+
+				</div>
 			</li>
 		</ul>
 <!-- 		<br>
