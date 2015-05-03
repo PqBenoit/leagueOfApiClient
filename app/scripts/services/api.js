@@ -143,6 +143,18 @@
 	                			return callback(null);
 	                	});
 	            },
+	            
+	        	/**
+	        	 * @function get
+	        	 * @memberof root.services.API
+	        	 * @description Sends get method to LOL API
+	        	 * @param {String} region
+	        	 *
+	        	 * @return {JSON} result for get request
+	        	 */
+	            getStatus: function(region){
+	            	return $http.get('http://status.leagueoflegends.com/shards/'+region);
+	            },
 
 	            /**
 	             * @function getAssets
@@ -225,22 +237,22 @@
 	            	});
 	            },
 
-	          //   *
-	        	 // * @function getChampion
-	        	 // * @memberof root.services.API
-	        	 // * @description Get champion object for given champion id
-	        	 // * @param {Int} champId
-	        	 // * @param {String} fields, comma-separated
-	        	 // * @param {Function} callback
-	        	 // *
-	        	 // * @returns {Function} Callback(JSON||null)
-	        	 
-	          //   getChampion: function (champId, fields, callback)
-	          //   {
-	          //   	API.getStaticData('V1.2/champion', champId, '?champData='+fields, function(champion){
-	          //   		return callback(champion);
-	          //   	});
-	          //   }
+	            /*
+	        	 * @function getChampion
+	        	 * @memberof root.services.API
+	        	 * @description Get champion object for given champion id
+	        	 * @param {Int} champId
+	        	 * @param {String} fields, comma-separated
+	        	 * @param {Function} callback
+	        	 *
+	        	 * @returns {Function} Callback(JSON||null)
+	        	 */
+	            getChampion: function (champId, fields, callback)
+	            {
+	            	API.getStaticData('V1.2/champion', champId, fields, function(champion){
+	            		return callback(champion);
+	            	});
+	            }
 
 	        };
 

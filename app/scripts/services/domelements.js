@@ -58,14 +58,6 @@
             startLoader: function ()
             {
               this.loaderHTML.style.display = 'block';
-              Velocity(this.loaderHTML, {
-                  left: "112%"
-              },
-              {
-                duration: 3000,
-                loop: true,
-                easing: [0.750, 0.000, 0.500, 1.000]
-              });
             },
 
             /**
@@ -78,7 +70,6 @@
             stopLoader: function ()
             {
               this.loaderHTML.style.display = 'none';
-              Velocity(this.loaderHTML, "stop", true);
             },
 
             /**

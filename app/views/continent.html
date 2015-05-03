@@ -1,1 +1,9 @@
-<h1>Continent view</h1>
+<h1>League of Legends {{lolStatus.name}} services status:</h1>
+
+<div class="services">
+  <articles class="item" ng-repeat="item in lolStatus.services">
+    <h1>{{item.name}}</h1>
+    <p>Status: {{item.status}}</p>
+    <p>Incidents: {{item.incidents.length}}</p>
+  </articles>
+</div>

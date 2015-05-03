@@ -7,5 +7,10 @@
   */
  angular.module('leagueOfApp')
   .controller('ContinentCtrl', function (API) {
-    
+    $scope.lolStatus = {};
+
+    API.getStatus($routeParams.region).success(function(data){
+      console.log(data);
+      $scope.lolStatus = data;
+    });
   });

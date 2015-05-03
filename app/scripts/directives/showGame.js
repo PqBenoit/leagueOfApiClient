@@ -6,7 +6,7 @@
   */
  angular
  	.module('leagueOfApp')
- 		.directive('showGame', function (API, Helpers, MatchMap){
+ 		.directive('showGame', function (DOMElements, MatchMap){
 		    return {
 		    	restrict: 'A',
 		    	scope: true,
@@ -16,17 +16,17 @@
 
 						// Prevent default click of selected content
 						event.preventDefault();
+
+						// DOMElements.startLoader();
 						
 						var gameSection = document.getElementById('game');
 						gameSection.className = 'animate-show opacity-0';
 
-						var matchSection = document.getElementById('game');
-
 						MatchMap.initMap(attr.game, attr.mode, attr.timestamp, scope, function(){
-              				gameSection.className = gameSection.className + ' opacity-1';
 
-              				matchSection.style.display = 'block';
-							Velocity(matchSection, {opacity: 1, duration: 1000});
+              				gameSection.className = 'animate-show opacity-1';
+
+							// DOMElements.stopLoader();
 						});
 						
 					});
