@@ -12,8 +12,8 @@
 		</aside>
 
 		<form ng-submit="getSummoner(summoner)">
-			<p>Merci de renseigner votre nom d'invocateur</p>
-			<input type="text" ng-model="summoner.name" id="summoner-name" placeholder="Nom d'invocateur">
+			<p>Merci de renseigner un nom d'invocateur</p>
+			<input type="text" ng-model="summoner.name" id="summoner-name">
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
 	</div>
@@ -31,7 +31,9 @@
 
 		<ul id="match-history">
 			<h1>10 dernières parties</h1>
-			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{red: game.teamId == '100', blue: game.teamId =='200', active: $index == selected}" ng-click="select(key)" show-game>
+
+			<li ng-repeat="(key, game) in gamesResults.games" data-game="{{game.gameId}}" data-mode="{{game.gameMode}}" data-timestamp="0" ng-class="{blue: game.teamId == '200', red: game.teamId =='100', active: $index == selected}" ng-click="select(key)" show-game>
+
 				<div ng-if="game.stats.win == true">Victoire</div>
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">

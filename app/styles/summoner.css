@@ -2,7 +2,7 @@
   background: url(../../images/bg/bg-map.png);
   height: auto !important;
   min-height: 100%;
-  /*
+  /**
    * @see directives/fadeIn.js
    */ }
   .container-summoner .animate-show, .container-summoner .animate-show.ng-hide-add, .container-summoner .animate-show.ng-hide-remove {
@@ -32,8 +32,8 @@
     opacity: 1; }
   .container-summoner #summoner-form {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50% !important;
+    left: 50% !important;
     transform: translate(-50%, -50%);
     width: 50%;
     height: 5em; }
@@ -57,7 +57,7 @@
         background: rgba(255, 255, 255, 0.2);
         width: 82%;
         height: 100%;
-        color: white;
+        color: #ffffff;
         text-align: center;
         vertical-align: top; }
         .container-summoner #summoner-form form input#summoner-name:focus {
@@ -72,9 +72,9 @@
         transition: all ease 0.2s;
         width: 15%;
         float: right;
-        background: #ff9c00;
+        background: #FF9C00;
         font-size: 2em;
-        color: white;
+        color: #ffffff;
         border: none;
         outline: none;
         height: 100%;
@@ -103,8 +103,6 @@
         overflow: hidden;
         padding: 2px;
         margin-bottom: 5px;
-        background: #ff9c00;
-        cursor: pointer;
         background: #ffba4d;
         cursor: pointer;
         position: relative;
@@ -141,10 +139,6 @@
           margin: 0 10px; }
           .container-summoner #summoner-history #match-history li p strong {
             font-weight: bold; }
-        .container-summoner #summoner-history #match-history li p.game-score {
-          top: 20px; }
-        .container-summoner #summoner-history #match-history li p.game-type {
-          top: 30px; }
         .container-summoner #summoner-history #match-history li ul.players {
           margin-top: 5px;
           width: 25px;
@@ -177,7 +171,6 @@
     display: inline-block;
     width: 60%; }
     .container-summoner #game #timeline {
-      background: #aaaaaa;
       height: 3px;
       line-height: 3px;
       margin-top: 15px; }
@@ -186,7 +179,7 @@
         border-radius: 5px;
         height: 10px;
         width: 10px;
-        background: #cccccc;
+        background: #CCCCCC;
         cursor: pointer;
         display: inline-block;
         margin-right: 5px; }
@@ -220,7 +213,6 @@
         .container-summoner #game #match-resume #first-team-resume ul {
           overflow: hidden; }
           .container-summoner #game #match-resume #first-team-resume ul li {
-            border-left: 4px solid #e25041;
             display: inline-block;
             float: left;
             height: auto;
@@ -232,7 +224,6 @@
         .container-summoner #game #match-resume #second-team-resume ul {
           overflow: hidden; }
           .container-summoner #game #match-resume #second-team-resume ul li {
-            border-left: 4px solid #2c82c9;
             display: inline-block;
             height: auto;
             width: auto; }

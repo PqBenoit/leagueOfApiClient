@@ -32,44 +32,32 @@ angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout,
 
          		array[i].mouseover(function(e){
 
-
-
          			if(this.node.region){
 
          				if(prevRegion != this.node.region){
          					$region.className -= ' info-container-loading';
-         					console.log('different region');
          					$scope.returnFreeChampions(this.node.region);
          				}
 
-		                  this.attr({'fill': '#FF9C00'});
-		                  this.node.style.opacity = 1;
+						this.attr({'fill': '#FF9C00'});
+						this.node.style.opacity = 1;
 
-		                  var region = this.node.region;
+						var region = this.node.region;
 
-		                  $http.get('http://status.leagueoflegends.com/shards/' + region.toLowerCase())
-		                  	.success(function(data){
-		                  		$scope.status = data.services.status;
-		                  		console.log($scope.status);
-		                  	})
-		                  	.error(function(err){
-		                  		$scope.status = 'online';
-		                  	});
+	                  	setTimeout(function(){
+	                  		$scope.region = region;
+	                  	}, 1000);
 
-		                  	setTimeout(function(){
-		                  		$scope.region = region;
-		                  	}, 1000);
+                     	var region = this.node.region;
 
-	                     	var region = this.node.region;
+	                     for(var i = 0; i < array.length; i++){
+	                        if(array[i].node.region === region){
+	                           array[i].attr({'fill': '#FF9C00'});
+	                           array[i].node.style.opacity = 1;
+	                        }
+	                     }
 
-		                     for(var i = 0; i < array.length; i++){
-		                        if(array[i].node.region === region){
-		                           array[i].attr({'fill': '#FF9C00'});
-		                           array[i].node.style.opacity = 1;
-		                        }
-		                     }
-
-		                     prevRegion = this.node.region;
+	                     prevRegion = this.node.region;
 
          			}
          		});
@@ -109,18 +97,16 @@ angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout,
 		  $scope.nameArray = [];
 
 		  $http.get('https://' + region + '.api.pvp.net/api/lol/' + region + '/v1.2/champion?freeToPlay=true&api_key=fa48a883-3b7d-4ba9-a996-805f017b53dc')
-		     .success(function(data, status){
-				for(var i = 0; i < data.champions.length; i++){
-
-					$http.get('https://global.api.pvp.net/api/lol/static-data/' + region.toLowerCase() + '/v1.2/champion/' + data.champions[i].id + '?champData=image&api_key=525fce0a-e89d-45c6-ad88-8422b0bba969')
-						.success(function(data, status){
-							$scope.nameArray.push(data.image.full);
-						})
-						.error(function(error){
-							console.log(error);
-						});
-				}
-
+		     .success(function(freeData, status){
+		     	$http.get('https://global.api.pvp.net/api/lol/static-data/' + region.toLowerCase() + '/v1.2/champion/?champData=image&dataById=true&api_key=525fce0a-e89d-45c6-ad88-8422b0bba969')
+					.success(function(data, status){
+						for(var i = 0; i < freeData.champions.length; i++){
+							$scope.nameArray.push(data.data[freeData.champions[i].id].image.full);
+						}
+					})
+					.error(function(error){
+						console.log(error);
+				});
 		     })
 		     .error(function(error){
 		        console.log(error);

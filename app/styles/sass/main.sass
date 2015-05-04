@@ -14,11 +14,6 @@ body
 
 	.ng-scope
 
-	main
-		height: 100%
-		[class*="container-"]
-			height: 100%
-
 		#map
 			height: 100%
 			width: 100%
@@ -45,94 +40,107 @@ body
 
 				path:hover 
 					cursor: pointer
+	
+	.pico-content.modal-events
+		+center()
+		position: fixed
+		width: 50%
+		background: $mainColorHover !important
+		border-radius: 0 !important
+		color: #000
 
-			#info-container
+	#info-container
+		position: absolute
+		bottom: 0
+		left: 0
+		width: 100%
+		height: 40px
+
+		.relative-container
+			position: relative
+			width: 100%
+			height: 40px
+
+			#loader-info
+				display: none
 				position: absolute
-				bottom: 0
-				left: 0
-				width: 100%
+				top: 0
+				left: 50%
+				margin-left: -15px
+				width: 30px
+				height: 2px
+				background: #FF9C00
+				-webkit-animation: loading 1s infinite ease-in
+				animation: loading 1s infinite ease-in
+
+			#left-part
+				overflow: hidden
+				position: absolute
+				width: 0%
 				height: 40px
+				top: 0
+				right: 50%
+				border-top: solid 2px #FF9C00
+				-webkit-transition: width 0.3s ease-out
+				transition: width 0.3s ease-out
 
-				.relative-container
-					position: relative
-					width: 100%
-					height: 40px
+				#region
+					right: 30px
 
-					#loader-info
-						display: none
-						position: absolute
-						top: 0
-						left: 50%
-						margin-left: -15px
-						width: 30px
-						height: 2px
-						background: #FF9C00
-						-webkit-animation: loading 1s infinite ease-in
+				#img-c
+					position: absolute
+					left: 0
 
-					#left-part
-						overflow: hidden
-						position: absolute
-						width: 0%
+					img
+						width: 40px
 						height: 40px
-						top: 0
-						right: 50%
-						border-top: solid 2px #FF9C00
-						-webkit-transition: width 0.3s ease-out
 
-						#region
-							right: 30px
+			#right-part
+				overflow: hidden
+				position: absolute
+				left: 50%
+				top: 0
+				height: 40px
+				width: 0% 
+				border-top: solid 2px #FF9C00
+				-webkit-transition: width 0.3s ease-out
+				transition: width 0.3s ease-out
 
-						#img-c
-							position: absolute
-							left: 0
+				span
+					position: absolute
+					color: #FF9C00
+					font-size: 24px
+					padding-top: 10px
 
-							img
-								width: 40px
-								height: 40px
+				#region
+					left: 140px
 
-					#right-part
-						overflow: hidden
-						position: absolute
-						left: 50%
-						top: 0
-						height: 40px
-						width: 0% 
-						border-top: solid 2px #FF9C00
-						-webkit-transition: width 0.3s ease-out
-
-						span
-							position: absolute
-							color: #FF9C00
-							font-size: 24px
-							padding-top: 10px
-
-						#region
-							left: 140px
-
-						#status
-							left: 340px
+				#status
+					left: 340px
 
 
 
-			.info-container-loading, .NaN
-				#loader-info
-					display: inline-block !important
+	.info-container-loading, .NaN
+		#loader-info
+			display: inline-block !important
 
-				#loader-info
-					display: inline-block !important
+		#loader-info
+			display: inline-block !important
 
 
-			.info-container-active
+	.info-container-active
 
-				.relative-container
+		.relative-container
 
-					#left-part
-						width: 50% !important
-						-webkit-transition: width 0.3s ease-out
+			#left-part
+				width: 50% !important
+				-webkit-transition: width 0.3s ease-out
+				transition: width 0.3s ease-out
 
-					#right-part
-						width: 50% !important
-						-webkit-transition: width 0.3s ease-out
+			#right-part
+				width: 50% !important
+				-webkit-transition: width 0.3s ease-out
+				transition: width 0.3s ease-out
 
 	main
 		height: 100%
@@ -150,7 +158,7 @@ body
 					display: block
 					width: 30px
 					height: 30px
-					+center(30px, 30px)
+					+center()
 					border: 4px solid #Fff
 					animation: loader 2s infinite ease
 
@@ -180,6 +188,39 @@ body
 				  
 
 				@keyframes loader-inner
+					0%
+						height: 0%
+
+					25%
+						height: 0%
+
+					50%
+						height: 100%
+
+					75%
+						height: 100%
+
+					100%
+						height: 0%
+				@-webkit-keyframes loader
+					0%
+						transform: rotate(0deg)
+
+					25%
+						transform: rotate(180deg)
+
+					50%
+						transform: rotate(180deg)
+
+					75%
+						transform: rotate(360deg)
+
+
+					100%
+						transform: rotate(360deg)
+				  
+
+				@-webkit-keyframes loader-inner
 					0%
 						height: 0%
 
@@ -253,6 +294,26 @@ body
 		color: #ffffff
 
 @-webkit-keyframes loading
+	0%
+		width: 50px
+		margin-left: -25px
+	50%
+		width: 0px
+		margin-left: 0
+	100%
+		width: 50px
+		margin-left: -25px
+@-moz-keyframes loading
+	0%
+		width: 50px
+		margin-left: -25px
+	50%
+		width: 0px
+		margin-left: 0
+	100%
+		width: 50px
+		margin-left: -25px
+@keyframes loading
 	0%
 		width: 50px
 		margin-left: -25px

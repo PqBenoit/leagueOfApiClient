@@ -70,8 +70,8 @@
               Map.setTimeline();
 
               Map.getParticipantPositions(function(cords){
-                Map.getEventPositions(function(cordsEvent){
-                  Map.loadMap(cords, cordsEvent);
+                Map.getEventPositions(function(cordsEvent, eventsWithoutCords){
+                  Map.loadMap(cords, cordsEvent, eventsWithoutCords);
 
                   // Allow to use match data in root scope
                   data.minuteDuration = Math.floor(data.matchDuration/60);
@@ -98,6 +98,8 @@
           getEventPositions: function (callback)
           {
             var cords = [];
+            var eventsWithoutCords = [];
+
             for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
 
               // Select the frame tha matched with setted timestamp
@@ -111,7 +113,6 @@
                     var positions = eventsFrame[eventId].position;
                     // Check if any positions in this frame
                     if (positions) {
-                      console.log(eventsFrame[eventId]);
                       var eventsInfos = eventsFrame[eventId];
 
                       // Setup cords array
@@ -122,12 +123,16 @@
                         type: 'events'
                       });
                     }
+                    else {
+                      console.log(eventsFrame[eventId]);
+                      eventsWithoutCords.push(eventsFrame[eventId]);
+                    }
                   }
                 }
               }   
             }
 
-            return callback(cords);
+            return callback(cords, eventsWithoutCords);
           },
 
           /**
@@ -196,7 +201,7 @@
            *
            * @returns {Void}
            */
-          loadMap: function (cords, cordsEvent)
+          loadMap: function (cords, cordsEvent, eventsWithoutCords)
           {
             Map.eventsRendered = false;
 
@@ -233,19 +238,19 @@
             var tooltip = document.createElement('div');
             tooltip.className = 'tooltip-map';
             map.appendChild(tooltip);
-
-            var buttonEvents = d3.select('#map-game').append('button')
-                .attr('class', 'eventsButton')
-                .html('Voir les évènements')
-                .on("click", function(e){
-                      if (Map.eventsRendered === false) {
-                        buttonEvents.html('Cacher les évènements');
-                        Map.renderEvents(cordsEvent, svg, xScale, yScale, tooltip);
-                      } else {
-                        buttonEvents.html('Voir les évènements');
-                        Map.removeEvents(svg);
-                      }
-                });
+            
+            if (cordsEvent.length > 0) {  
+              var buttonEvents = d3.select('#map-game').append('button')
+                  .attr('class', 'eventsButton')
+                  .html('Voir/cacher les évènements')
+                  .on("click", function(){
+                        if (Map.eventsRendered === false) {
+                          Map.renderEvents(cordsEvent, svg, xScale, yScale, tooltip);
+                        } else {
+                          Map.removeEvents(svg);
+                        }
+                  });
+            }
 
             svg.append('image')
                 .attr('xlink:href', bg)
@@ -289,13 +294,48 @@
                     .attr('fill', function(d) {
                         return 'url(#p-'+d.participantData.participantId+')';
                     })
-                    .attr('class', 'kills')
                     .on("mouseover", function(d){
                       tooltip.style.visibility = 'visible';
                       tooltip.innerHTML = d.participantData.championName+" | level: "+d.participantData.level;
                     })
                     .on("mouseout", function(){
+                      tooltip.innerHTML = "";
                       return tooltip.style.visibility = "hidden";
+                    })
+                    .on("click", function(d){
+                      var content = "";
+                      var anyItemPurchased = false;
+                      var anyItemDestroyed = false;
+
+                      for (var i =  0, j = eventsWithoutCords.length ; i < j ; i++) {
+
+                        if (eventsWithoutCords[i].participantId == d.participantData.participantId) {
+                          if (eventsWithoutCords[i].eventType === 'ITEM_PURCHASED') {
+                            if (anyItemPurchased === false) {
+                              content = content + "<p>Item(s) acheté(s):</p><br>";
+                            }
+                            anyItemPurchased = true;
+                            content = content + "<img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbsp;";
+                          } //else if (eventsWithoutCords[i].eventType === 'ITEM_DESTROYED') {
+                          //   if (anyItemDestroyed === false) {
+                          //     content = content + "<p>Item(s) détruit(s):</p><br>";
+                          //   }
+                          //   anyItemDestroyed = true;
+                          //   content = content + "<img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbps;";
+                          // }
+                        }
+
+                      }
+
+                      if (content != '') {                      
+                        var modal = picoModal({
+                          content: content,
+                          closeButton: false,
+                          modalClass: 'modal-events'
+                        });
+                        modal.show();
+                      }
+
                     });
           },
 
@@ -376,6 +416,8 @@
                                   return 'url(#close-icon)';
                                 } else if (de.eventsData.eventType === 'BUILDING_KILL') {
                                   return 'url(#tower-icon)';
+                                } else if (de.eventsData.eventType === 'ELITE_MONSTER_KILL') {
+                                  return 'url(#close-icon)';
                                 }
                             })
                             .on("mouseover", function(de){
@@ -384,9 +426,12 @@
                                 tooltip.innerHTML = 'victime: '+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.victimId].championId].name+" | Tueur: "+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.killerId].championId].name;
                               } else if (de.eventsData.eventType === 'BUILDING_KILL'){
                                 tooltip.innerHTML = 'Tourelle détruite par: '+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.killerId].championId].name;
+                              } else if (de.eventsData.eventType === 'ELITE_MONSTER_KILL' && de.eventsData.monsterType === 'DRAGON') {
+                                tooltip.innerHTML = 'Dragon tué par: '+Map.scope.champInfos.data[Map.matchData.participantsInfo[de.eventsData.killerId].championId].name;
                               }
                             })
                             .on("mouseout", function(){
+                              tooltip.innerHTML = "";
                               return tooltip.style.visibility = "hidden";
                             });
           },

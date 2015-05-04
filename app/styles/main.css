@@ -80,103 +80,90 @@ body {
       margin: -334px 0 0 -506px; }
       body .ng-scope #map #svg-container path:hover {
         cursor: pointer; }
+  body .pico-content.modal-events {
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    width: 50%;
+    background: #FFB23A !important;
+    border-radius: 0 !important;
+    color: #000; }
+  body #info-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; }
+    body #info-container .relative-container {
+      position: relative;
+      width: 100%;
+      height: 40px; }
+      body #info-container .relative-container #loader-info {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -15px;
+        width: 30px;
+        height: 2px;
+        background: #FF9C00;
+        -webkit-animation: loading 1s infinite ease-in;
+        animation: loading 1s infinite ease-in; }
+      body #info-container .relative-container #left-part {
+        overflow: hidden;
+        position: absolute;
+        width: 0%;
+        height: 40px;
+        top: 0;
+        right: 50%;
+        border-top: solid 2px #FF9C00;
+        -webkit-transition: width 0.3s ease-out;
+        transition: width 0.3s ease-out; }
+        body #info-container .relative-container #left-part #region {
+          right: 30px; }
+        body #info-container .relative-container #left-part #img-c {
+          position: absolute;
+          left: 0; }
+          body #info-container .relative-container #left-part #img-c img {
+            width: 40px;
+            height: 40px; }
+      body #info-container .relative-container #right-part {
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        height: 40px;
+        width: 0%;
+        border-top: solid 2px #FF9C00;
+        -webkit-transition: width 0.3s ease-out;
+        transition: width 0.3s ease-out; }
+        body #info-container .relative-container #right-part span {
+          position: absolute;
+          color: #FF9C00;
+          font-size: 24px;
+          padding-top: 10px; }
+        body #info-container .relative-container #right-part #region {
+          left: 140px; }
+        body #info-container .relative-container #right-part #status {
+          left: 340px; }
+  body .info-container-loading #loader-info, body .NaN #loader-info {
+    display: inline-block !important; }
+  body .info-container-loading #loader-info, body .NaN #loader-info {
+    display: inline-block !important; }
+  body .info-container-active .relative-container #left-part {
+    width: 50% !important;
+    -webkit-transition: width 0.3s ease-out;
+    transition: width 0.3s ease-out; }
+  body .info-container-active .relative-container #right-part {
+    width: 50% !important;
+    -webkit-transition: width 0.3s ease-out;
+    transition: width 0.3s ease-out; }
   body main {
     height: 100%; }
     body main [class*="container-"] {
       height: 100%; }
-    body main #map {
-      height: 100%;
-      width: 100%;
-      background: url(../../images/bg/bg-map.png);
-      position: relative;
-      display: table; }
-      body main #map #svg-container {
-        width: 1013px;
-        height: 669px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -334px 0 0 -506px; }
-        body main #map #svg-container path:hover {
-          cursor: pointer; }
-      body main #map #info-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40px; }
-        body main #map #info-container .relative-container {
-          position: relative;
-          width: 100%;
-          height: 40px; }
-          body main #map #info-container .relative-container #loader-info {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            margin-left: -15px;
-            width: 30px;
-            height: 2px;
-            background: #ff9c00;
-            -webkit-animation: loading 1s infinite ease-in; }
-          body main #map #info-container .relative-container #left-part {
-            overflow: hidden;
-            position: absolute;
-            width: 0%;
-            height: 40px;
-            top: 0;
-            right: 50%;
-            border-top: solid 2px #ff9c00;
-            -webkit-transition: width 0.3s ease-out; }
-            body main #map #info-container .relative-container #left-part #region {
-              right: 30px; }
-            body main #map #info-container .relative-container #left-part #img-c {
-              position: absolute;
-              left: 0; }
-              body main #map #info-container .relative-container #left-part #img-c img {
-                width: 40px;
-                height: 40px; }
-          body main #map #info-container .relative-container #right-part {
-            overflow: hidden;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            height: 40px;
-            width: 0%;
-            border-top: solid 2px #ff9c00;
-            -webkit-transition: width 0.3s ease-out; }
-            body main #map #info-container .relative-container #right-part span {
-              position: absolute;
-              color: #ff9c00;
-              font-size: 24px;
-              padding-top: 10px; }
-            body main #map #info-container .relative-container #right-part #region {
-              left: 140px; }
-            body main #map #info-container .relative-container #right-part #status {
-              left: 340px; }
-      body main #map .info-container-loading #loader-info, body main #map .NaN #loader-info {
-        display: inline-block !important; }
-      body main #map .info-container-loading #loader-info, body main #map .NaN #loader-info {
-        display: inline-block !important; }
-      body main #map .info-container-active .relative-container #left-part {
-        width: 50% !important;
-        -webkit-transition: width 0.3s ease-out; }
-      body main #map .info-container-active .relative-container #right-part {
-        width: 50% !important;
-        -webkit-transition: width 0.3s ease-out; }
-    body main #loader {
-      width: 100%;
-      height: 4px;
-      position: fixed;
-      top: 0;
-      display: block;
-      z-index: 1000; }
-      body main #loader .loader-content {
-        width: 20%;
-        height: 4px;
-        left: -16%;
-        background: #ff9c00;
-        position: absolute; }
       body main [class*="container-"] #loader-content {
         display: none;
         background: rgba(0, 0, 0, 0.5);
@@ -190,8 +177,8 @@ body {
           width: 30px;
           height: 30px;
           position: absolute;
-          top: 50%;
-          left: 50%;
+          top: 50% !important;
+          left: 50% !important;
           transform: translate(-50%, -50%);
           border: 4px solid #Fff;
           animation: loader 2s infinite ease; }
@@ -223,9 +210,30 @@ body {
     height: 100%; }
   100% {
     height: 0%; } }
->>>>>>> 0268da8ab8c4376a8cd2de1b3ff5ec586a7c9596
+@-webkit-keyframes loader {
+  0% {
+    transform: rotate(0deg); }
+  25% {
+    transform: rotate(180deg); }
+  50% {
+    transform: rotate(180deg); }
+  75% {
+    transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg); } }
+@-webkit-keyframes loader-inner {
+  0% {
+    height: 0%; }
+  25% {
+    height: 0%; }
+  50% {
+    height: 100%; }
+  75% {
+    height: 100%; }
+  100% {
+    height: 0%; } }
     body main .tooltip {
-      color: white;
+      color: #ffffff;
       padding: 20px;
       background: rgba(0, 0, 0, 0.5); }
       body main .tooltip:after {
@@ -239,9 +247,6 @@ body {
         border-width: 5px 5px 0 5px;
         border-color: rgba(0, 0, 0, 0.5) transparent transparent; }
     body main .tooltip-map {
-      color: white;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.5); 
       visibility: hidden;
       color: #ffffff;
       height: 20px;
@@ -278,17 +283,37 @@ body {
     text-align: center; }
   body div.flash-errors {
     background: #257383;
-    color: white; }
+    color: #ffffff; }
 
 @-webkit-keyframes loading {
   0% {
     width: 50px;
     margin-left: -25px; }
-
   50% {
     width: 0px;
     margin-left: 0; }
-
   100% {
     width: 50px;
     margin-left: -25px; } }
+@-moz-keyframes loading {
+  0% {
+    width: 50px;
+    margin-left: -25px; }
+  50% {
+    width: 0px;
+    margin-left: 0; }
+  100% {
+    width: 50px;
+    margin-left: -25px; } }
+@keyframes loading {
+  0% {
+    width: 50px;
+    margin-left: -25px; }
+  50% {
+    width: 0px;
+    margin-left: 0; }
+  100% {
+    width: 50px;
+    margin-left: -25px; } }
+
+/*# sourceMappingURL=main.css.map */

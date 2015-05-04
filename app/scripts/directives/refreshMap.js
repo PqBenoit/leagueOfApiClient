@@ -22,8 +22,8 @@
 						// Refresh map data
 						MatchMap.setTimeline();
 			            MatchMap.getParticipantPositions(function(cords){
-			            	MatchMap.getEventPositions(function(cordsEvent){
-				            	MatchMap.loadMap(cords, cordsEvent);
+			            	MatchMap.getEventPositions(function(cordsEvent, eventsWithoutCords){
+				            	MatchMap.loadMap(cords, cordsEvent, eventsWithoutCords);
 			            	});
 			            });
 						
