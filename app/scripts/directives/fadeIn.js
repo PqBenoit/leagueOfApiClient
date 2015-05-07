@@ -6,7 +6,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
 
 /**
   * @class root.directives.fadeIn
-  * @description To animate html elements with fade in style
+  * @description Directive. To animate html elements with fade in style
   */
  angular
  	.module('leagueOfApp')

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/domelements.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: services/domelements.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
+
+/**
+ * @class root.services.DOMElements
+ * @description Loader utilities methods
+ * 
+ */
+ angular
+  .module('leagueOfApp')
+    .service('DOMElements', 
+
+      function(){
+
+        var DOMElements = {
+
+            /**
+             * @var loaderHTML
+             * @memberof root.services.DOMElements
+             * @description HTML element for the loader
+             * @public
+             */
+            loaderHTML: null,
+
+            /**
+             * @var messageHTML
+             * @memberof root.services.DOMElements
+             * @description HTML element for flash message
+             * @public
+             */
+            messageHTML: null,
+
+            /**
+             * @var tooltipHTML
+             * @memberof root.services.DOMElements
+             * @description HTML element for tooltip
+             * @public
+             */
+            tooltipHTML: null,
+            
+            /**
+             * @function initLoader
+             * @memberof root.services.DOMElements
+             * @description Init the loader, set the HTML element and hide it by default.
+             * @param {HTMLElement} element
+             * @public
+             *
+             * @returns {Void}
+             */
+            initLoader: function (element)
+            {
+              this.loaderHTML = element;
+              this.loaderHTML.style.display = 'none';
+            },
+
+            /**
+             * @function startLoader
+             * @memberof root.services.DOMElements
+             * @description Start the loader animation
+             * @public
+             *
+             * @returns {Void}
+             */
+            startLoader: function ()
+            {
+              this.loaderHTML.style.display = 'block';
+            },
+
+            /**
+             * @function stopLoader
+             * @memberof root.services.DOMElements
+             * @description hide the loader
+             * @public
+             *
+             * @returns {Void}
+             */
+            stopLoader: function ()
+            {
+              this.loaderHTML.style.display = 'none';
+            },
+
+            /**
+             * @function setFlashMessage
+             * @memberof root.services.DOMElements
+             * @description Set the message, and display it.
+             * @param {string} message
+             * @param {string} type (errors, infos, warnings, default)
+             * @public
+             *
+             * @returns {Void}
+             */
+            setFlashMessage: function (message, type)
+            {
+              var body = document.getElementsByTagName('body');
+              
+              this.messageHTML = document.createElement('div');
+              this.messageHTML.className = 'flash-'+type;
+              this.messageHTML.innerHTML = this.messageHTML.innerHTML+message;
+
+              body[0].appendChild(this.messageHTML);
+            },
+
+            /**
+             * @function displayFlashMessage
+             * @memberof root.services.DOMElements
+             * @description display it.
+             * @param {string} message
+             * @param {string} type (errors, infos, warnings, default)
+             * @param {int} displayTime, time to display flash message in ms
+             * @public
+             *
+             * @returns {Void}
+             */
+            displayFlashMessage: function (message, type, displayTime)
+            {
+              if (this.messageHTML) {
+                this.removeFlashMessage();
+              } 
+              
+              this.setFlashMessage(message, type);
+              this.messageHTML.style.display = "block";
+
+              setTimeout(function(){
+                DOMElements.removeFlashMessage();
+              }, displayTime);
+            },
+
+            /**
+             * @function removeFlashMessage
+             * @memberof root.services.DOMElements
+             * @description Remove it
+             * @public
+             *
+             * @returns {Void}
+             */
+            removeFlashMessage: function ()
+            {
+              if (this.messageHTML) {  
+                this.messageHTML.style.display = "none";
+                this.messageHTML.innerHTML = '';
+              }
+            },
+
+            /**
+             * @function displayTooltip
+             * @memberof root.services.DOMElements
+             * @description set up the tooltip HTMLElement
+             * @param {HTMLElement} parentElement
+             * @public
+             *
+             * @returns {Void}
+             */
+            displayTooltip: function (parentElement, content)
+            {
+              this.tooltipHTML = document.createElement('span');
+              var xpos = parentElement.offsetLeft;
+              var ypos = parentElement.offsetTop;
+
+              parentElement.style.position = 'relative';
+
+              this.tooltipHTML.className = 'tooltip';
+              this.tooltipHTML.innerHTML = content;
+              this.tooltipHTML.style.position = 'absolute';
+              this.tooltipHTML.style.left = "0";
+              this.tooltipHTML.style.top = "-50px";
+
+              parentElement.appendChild(this.tooltipHTML);
+            },
+
+            /**
+             * @function removeTooltip
+             * @memberof root.services.DOMElements
+             * @description remove the tooltip HTMLElement of DOM
+             * @public
+             *
+             * @returns {Void}
+             */
+            removeTooltip: function ()
+            {
+              this.tooltipHTML.remove();
+            }
+        };
+
+        return DOMElements;
+    });</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="leagueOfApp.html">leagueOfApp</a></li></ul><h3>Classes</h3><ul><li><a href="root.controllers.HomeCtrl.html">HomeCtrl</a></li><li><a href="root.controllers.SummonerCtrl.html">SummonerCtrl</a></li><li><a href="root.directives.fadeIn.html">fadeIn</a></li><li><a href="root.directives.refreshGame.html">refreshGame</a></li><li><a href="root.directives.showGame.html">showGame</a></li><li><a href="root.directives.timelineTooltip.html">timelineTooltip</a></li><li><a href="root.services.API.html">API</a></li><li><a href="root.services.DOMElements.html">DOMElements</a></li><li><a href="root.services.Helpers.html">Helpers</a></li><li><a href="root.services.mapService.html">mapService</a></li><li><a href="root.services.matchMap.html">matchMap</a></li></ul><h3>Namespaces</h3><ul><li><a href="root.html">root</a></li><li><a href="root.controllers.html">controllers</a></li><li><a href="root.directives.html">directives</a></li><li><a href="root.services.html">services</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 07 2015 12:20:02 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

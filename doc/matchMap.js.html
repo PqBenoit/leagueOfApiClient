@@ -1,4 +1,31 @@
-'use strict';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/matchMap.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: services/matchMap.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
 
 /**
  * @class root.services.matchMap
@@ -100,7 +127,7 @@
             var cords = [];
             var eventsWithoutCords = [];
 
-            for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
+            for (var i = 0, j = Map.matchData.timeline.frames.length ; i &lt; j ; i++) {
 
               // Select the frame tha matched with setted timestamp
               if (Map.matchData.timeline.frames[i].timestamp == Map.timestamp) {
@@ -148,7 +175,7 @@
           {
             var cords = [];
             Map.matchData.participantsInfo = {};
-            for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
+            for (var i = 0, j = Map.matchData.timeline.frames.length ; i &lt; j ; i++) {
 
               // Select the frame tha matched with setted timestamp
               if (Map.matchData.timeline.frames[i].timestamp == Map.timestamp) {
@@ -165,7 +192,7 @@
                       var participantInfos = participantFrame[participantId];
 
                       // Setup the some extra infos
-                      for (var ii = 0, jj = Map.matchData.participants.length ; ii < jj ; ii++) {
+                      for (var ii = 0, jj = Map.matchData.participants.length ; ii &lt; jj ; ii++) {
 
                         if (Map.matchData.participants[ii].participantId == participantId) {
                           Map.matchData.participantsInfo[participantId] = Map.matchData.participants[ii];
@@ -176,7 +203,7 @@
                       }
 
                       // Setup cords array
-                      if (parseInt(participantId) <= 5) {
+                      if (parseInt(participantId) &lt;= 5) {
                         cords.push({x: positions.x, y: positions.y, participantData: participantInfos, type: 'participant'});
                       } else {
                         cords.push({x: positions.x, y: positions.y, participantData: participantInfos, type: 'participant'});
@@ -260,7 +287,7 @@
                 .attr('height', height);
 
             
-            for (var i = 0, j = Map.matchData.participants.length ; i < j ; i++) {
+            for (var i = 0, j = Map.matchData.participants.length ; i &lt; j ; i++) {
                 svg.append('def')
                     .attr('class', 'avatar')
                     .append('pattern')
@@ -307,21 +334,21 @@
                       var anyItemPurchased = false;
                       var anyItemDestroyed = false;
 
-                      for (var i =  0, j = eventsWithoutCords.length ; i < j ; i++) {
+                      for (var i =  0, j = eventsWithoutCords.length ; i &lt; j ; i++) {
 
                         if (eventsWithoutCords[i].participantId == d.participantData.participantId) {
                           if (eventsWithoutCords[i].eventType === 'ITEM_PURCHASED') {
                             if (anyItemPurchased === false) {
-                              content = content + "<p>Item(s) acheté(s):</p><br>";
+                              content = content + "&lt;p>Item(s) acheté(s):&lt;/p>&lt;br>";
                             }
                             anyItemPurchased = true;
-                            content = content + "<img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbsp;";
+                            content = content + "&lt;img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbsp;";
                           } //else if (eventsWithoutCords[i].eventType === 'ITEM_DESTROYED') {
                           //   if (anyItemDestroyed === false) {
-                          //     content = content + "<p>Item(s) détruit(s):</p><br>";
+                          //     content = content + "&lt;p>Item(s) détruit(s):&lt;/p>&lt;br>";
                           //   }
                           //   anyItemDestroyed = true;
-                          //   content = content + "<img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbps;";
+                          //   content = content + "&lt;img src='http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/"+eventsWithoutCords[i].itemId+".png' alt='item purchased' width='25px'>&nbps;";
                           // }
                         }
 
@@ -405,7 +432,7 @@
                             .attr('r', 12)
                             .attr('class', 'eventCircles')
                             .attr('stroke', function(de) {
-                              if ((de.eventsData.teamId && de.eventsData.teamId <= 100) || (de.eventsData.victimId && de.eventsData.victimId < 5)) {
+                              if ((de.eventsData.teamId && de.eventsData.teamId &lt;= 100) || (de.eventsData.victimId && de.eventsData.victimId &lt; 5)) {
                                 return '#E25041';
                               } else {
                                 return '#2C82C9';
@@ -465,7 +492,7 @@
             var timeline = document.getElementById('timeline');
             timeline.innerHTML = "";
             
-            for (var i = 0, j = Map.matchData.timeline.frames.length ; i < j ; i++) {
+            for (var i = 0, j = Map.matchData.timeline.frames.length ; i &lt; j ; i++) {
               var frame = Map.matchData.timeline.frames[i];
               var timePoint = document.createElement('p');
 
@@ -485,3 +512,26 @@
 
         return Map;
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="leagueOfApp.html">leagueOfApp</a></li></ul><h3>Classes</h3><ul><li><a href="root.controllers.HomeCtrl.html">HomeCtrl</a></li><li><a href="root.controllers.SummonerCtrl.html">SummonerCtrl</a></li><li><a href="root.directives.fadeIn.html">fadeIn</a></li><li><a href="root.directives.refreshGame.html">refreshGame</a></li><li><a href="root.directives.showGame.html">showGame</a></li><li><a href="root.directives.timelineTooltip.html">timelineTooltip</a></li><li><a href="root.services.API.html">API</a></li><li><a href="root.services.DOMElements.html">DOMElements</a></li><li><a href="root.services.Helpers.html">Helpers</a></li><li><a href="root.services.mapService.html">mapService</a></li><li><a href="root.services.matchMap.html">matchMap</a></li></ul><h3>Namespaces</h3><ul><li><a href="root.html">root</a></li><li><a href="root.controllers.html">controllers</a></li><li><a href="root.directives.html">directives</a></li><li><a href="root.services.html">services</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu May 07 2015 12:20:02 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

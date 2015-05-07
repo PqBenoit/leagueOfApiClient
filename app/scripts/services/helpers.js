@@ -47,8 +47,8 @@
           /**
              * @function setVarToRootScope
              * @memberof root.services.Helpers
-             * @description Add var to the $scope
-             * Thought for directives
+             * @description Add var to the $rootScope
+             * set force to true to rewrite the var named by given name, if it already exist.
              * @param {String} name
              * @param {mixed} value
              * @param {Boolean} force

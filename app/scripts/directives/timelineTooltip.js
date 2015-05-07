@@ -1,8 +1,8 @@
 'use strict';
 
 /**
-  * @class root.directives.showGame
-  * @description tooltip for timeline hover
+  * @class root.directives.timelineTooltip
+  * @description Directive. tooltip for timeline hover
   */
  angular
  	.module('leagueOfApp')
