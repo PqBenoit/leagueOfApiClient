@@ -8,133 +8,133 @@
  */
 angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout, mapService, DOMElements, API, $http, $location, $rootScope) {	
 
-	mapService.setMap(function(countries){		
-		$scope.countries = countries
-	});
+	/**
+	 * @function bindRegions
+	 * @memberof root.controllers.HomeCtrl
+	 * @description bind world map regions
+	 * @param {Array} array
+	 * @public
+	 *
+	 * @returns {Namespace} info
+	 */
+	$scope.bindRegions = function (array)
+	{
 
-		/**
-		 * @function bindRegions
-		 * @memberof root.controllers.HomeCtrl
-		 * @description bind world map regions
-		 * @param {Array} array
-		 * @public
-		 *
-		 * @returns {Namespace} info
-		 */
-		$scope.bindRegions = function(array){
+    	var prevRegion = '';
 
-            var prevRegion = '';
-            var $region = document.getElementById('info-container');
-            var info = {};
+     	for (var i = 0, j = array.length ; i < j ; i++) {
 
-         	for(var i = 0; i < array.length; i++){
+     		array[i].node.style.opacity = 0.4;
 
-         		array[i].node.style.opacity = 0.4;
 
-         		array[i].click(function(e){
-         			if(this.node.region){
-         				$location.path('summoner/' + this.node.region);
-         				$location.replace();
-         				$rootScope.$apply();
-         			}
-         		})
+     		array[i].click(function(e) {
 
-         		array[i].mouseover(function(e){
+     			if (this.node.region) {
 
-         			if(this.node.region){
+     				$location.path('summoner/' + this.node.region);
+     				$location.replace();
+     				$rootScope.$apply();
 
-         				if(prevRegion != this.node.region){
-         					$region.className -= ' info-container-loading';
-         					$scope.returnFreeChampions(this.node.region);
-         				}
+     			}
 
-						this.attr({'fill': '#FF9C00'});
-						this.node.style.opacity = 1;
+     		});
 
-						var region = this.node.region;
 
-	                  	setTimeout(function(){
-	                  		$scope.region = region;
-	                  	}, 1000);
+     		array[i].mouseover(function(e) {
 
-                     	var region = this.node.region;
+     			if (this.node.region) {
 
-	                     for(var i = 0; i < array.length; i++){
-	                        if(array[i].node.region === region){
-	                           array[i].attr({'fill': '#FF9C00'});
-	                           array[i].node.style.opacity = 1;
-	                        }
-	                     }
+					this.attr({'fill': '#FF9C00'});
+					this.node.style.opacity = 1;
 
-	                     prevRegion = this.node.region;
+                  	$scope.region = this.node.region;
 
-         			}
-         		});
+                    for (var ii = 0, jj = array.length ; ii < jj ; ii++) {
 
-         		array[i].mouseout(function(e){
+	                    if (array[ii].node.region !== this.node.region) {
 
-         			this.attr({'fill': '#999999'});
-                  	this.node.style.opacity = 0.4;
+	                    	continue;
+	                    }
+                       
+						array[ii].attr({'fill': '#FF9C00'});
+						array[ii].node.style.opacity = 1;
 
-         			if(this.node.region){
+                    }
 
-         				var region = this.node.region;
+                 	if (prevRegion != this.node.region) {
+     					$scope.returnFreeChampions(this.node.region);
+     				}
 
-         				for(var i = 0; i < array.length; i++){
-         					if(array[i].node.region === region){
-         						array[i].node.style.opacity = 0.4;
-         						array[i].attr({'fill': '#999999'});
-         					}
-         				}
-         			}
-         		});
-         	}
+                    prevRegion = this.node.region;
+     			}
 
-            return info;
-        }
+     		});
 
-         /**
-		  * @function returnFreeChampions
-		  * @memberof root.controllers.HomeCtrl
-		  * @description to show free champions for the week
-		  * @param {String} region
-		  * @public
-		  *
-		  * @returns {Void}
-		  */
-         $scope.returnFreeChampions = function(region){
 
-		  var $region = document.getElementById('info-container');
-		  var champArray = [];
+     		array[i].mouseout(function(e) {
 
-		  $region.className = ' info-container-loading';
+     			if (this.node.region) {
 
-		  var regionInfo = {};
+     				for (var iii = 0, jjj = array.length ; iii < jjj ; iii++) {
 
-		  $scope.nameArray = [];
+     					if (array[iii].node.region !== this.node.region) {
+     						continue;
+     					}
 
-		  $http.get('https://' + region + '.api.pvp.net/api/lol/' + region + '/v1.2/champion?freeToPlay=true&api_key=fa48a883-3b7d-4ba9-a996-805f017b53dc')
-		     .success(function(freeData, status){
-		     	$http.get('https://global.api.pvp.net/api/lol/static-data/' + region.toLowerCase() + '/v1.2/champion/?champData=image&dataById=true&api_key=525fce0a-e89d-45c6-ad88-8422b0bba969')
+     					array[iii].node.style.opacity = 0.4;
+     					array[iii].attr({'fill': '#999999'});
+     				}
+
+     			}
+
+     		});
+
+     	}
+    };
+
+	/**
+	* @function returnFreeChampions
+	* @memberof root.controllers.HomeCtrl
+	* @description to show free champions for the week
+	* @param {String} region
+	* @public
+	*
+	* @returns {Void}
+	*/
+	$scope.returnFreeChampions = function (region)
+	{
+	  	var champArray = [], 
+				regionInfo = {};
+
+		$region.className = ' info-container-loading';
+		$scope.names = [];
+
+		$http.get('https://' + region + '.api.pvp.net/api/lol/' + region + '/v1.2/champion?freeToPlay=true&api_key=fa48a883-3b7d-4ba9-a996-805f017b53dc')
+			.success(function(freeData, status){
+				$http.get('https://global.api.pvp.net/api/lol/static-data/' + region.toLowerCase() + '/v1.2/champion/?champData=image&dataById=true&api_key=525fce0a-e89d-45c6-ad88-8422b0bba969')
 					.success(function(data, status){
 						for(var i = 0; i < freeData.champions.length; i++){
-							$scope.nameArray.push(data.data[freeData.champions[i].id].image.full);
+							$scope.names.push(data.data[freeData.champions[i].id].image.full);
 						}
+
+						$region.className = 'info-container-active';
 					})
 					.error(function(error){
 						console.log(error);
-				});
-		     })
-		     .error(function(error){
-		        console.log(error);
-		     });
+					});
+			})
+			.error(function(error){
+				console.log(error);
+			});
+	};
 
-		     setTimeout(function(){
-		     	$region.className = '';
-		     	$region.className = 'info-container-active';
-		     }, 5000);
+	mapService.setMap(function(countries) {	
 
-		}
+		$scope.countries = countries
 
-		$scope.infos = $scope.bindRegions($scope.countries);
+	});
+
+	var $region = document.getElementById('info-container');
+
+	$scope.bindRegions($scope.countries);
 });
