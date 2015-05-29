@@ -2,20 +2,12 @@
 
 	<div id="summoner-form">
 
-		<aside role="note">
-			<h1>
-				
-			</h1>
-			<p>
-				
-			</p>
-		</aside>
-
 		<form ng-submit="getSummoner(summoner)">
 			<p>Renseigner votre nom d'invocateur ou celui d'un ami</p>
 			<input type="text" ng-model="summoner.name" id="summoner-name">
 			<button type="button" ng-click="getSummoner(summoner)"><i class="fa fa-arrow-circle-o-right"></i></button>
 		</form>
+
 	</div>
 
 	<div class="player-stats" id="summoner-stats">
@@ -42,6 +34,7 @@
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
 					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
 				</div>
+
 				<p class="game-score">
 					<span ng-if="game.stats.championsKilled">{{game.stats.championsKilled}}</span>
 					<span ng-if="!game.stats.championsKilled">0</span>
@@ -52,45 +45,34 @@
 					<span ng-if="game.stats.assists">{{game.stats.assists}} </span>
 					<span ng-if="!game.stats.assists">0</span>
 				</p>
+
 				<p class="game-type">Type de partie: <strong>{{game.subType}}</strong></p>
-				<div class="scoreAndItems">
-<!-- 					<div>
-						<p>{{game.stats.item0}} {{game.stats.item1}} {{game.stats.item2}}</p>
-						<p>{{game.stats.item3}} {{game.stats.item4}} {{game.stats.item5}}</p>
-					</div> -->
+
+				<div>
+					<p>
+						<img ng-if="game.stats.item0" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item0}}.png" alt="objet 0 en fin de partie" width="24px" height="24px"> 
+						<img ng-if="game.stats.item1" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item1}}.png" alt="objet 1 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item2" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item2}}.png" alt="objet 2 en fin de partie" width="24px" height="24px">
+					</p>
+					<p>
+						<img ng-if="game.stats.item3" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item3}}.png" alt="objet 3 en fin de partie" width="24px" height="24px"> 
+						<img ng-if="game.stats.item4" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item4}}.png" alt="objet 4 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item5" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item5}}.png" alt="objet 5 en fin de partie" width="24px" height="24px">
+					</p>
 				</div>
-				<!-- <ul class="players">
-					<li ng-repeat="player in game.fellowPlayers">
-				<!-- <p style="display: none;"><a href="">{{game.gameId}}</a></p> -->
-				<!-- <p>{{game.subType}}</p> -->
-<!-- 				<div class="players">
-					<ul>
-						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '100'">
-							<p class="firstteam" >{{player.summonerId}}</p>
-						</li>
-						<li ng-repeat="player in game.fellowPlayers" ng-if="player.teamId == '200'">
-							<p class="secondteam" >{{player.summonerId}}</p>
-						</li>
-					</ul>
-				</div> -->
+
 			</li>
+
 		</ul>
-<!-- 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		SummonerGamesResults : 
-		{{gamesResults}}
-		<br>
-		SummonerStatsResults : 
-		{{statsResults}} -->
+
 	</section>
 
 	<section id="game" class="animate-show opacity-0">
+
 		<div id="match-resume">
+
 			<h1>Durée: {{match.minuteDuration}} minutes</h1>
+
 			<section id="first-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants | limitTo: 5">
@@ -98,7 +80,9 @@
 					</li>
 				</ul>
 			</section>
+
 			<span class="vs">VS</span>
+
 			<section id="second-team-resume">
 				<ul>
 					<li ng-repeat="(key, participant) in match.participants.slice().reverse() | limitTo: 5">
@@ -106,11 +90,15 @@
 					</li>
 				</ul>
 			</section>
+
 		</div>
+
 		<div id="map-game">
 		</div>
+
 		<div id="timeline">
 		</div>
+
 	</section>
 
 	<div class="clear"></div>

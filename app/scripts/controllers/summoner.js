@@ -158,7 +158,8 @@
 			 */
 			$scope.getSummoner = function (summoner)
 			{
-				if (!summoner) {
+				console.log(summoner);
+				if (!summoner || '' === summoner.name) {
 
 					DOMElements.displayFlashMessage('Aucun nom renseigné !', 'errors', 4000);
 
@@ -177,11 +178,10 @@
 								getStats(id, function() {
 
 									DOMElements.removeFlashMessage();
-
 									DOMElements.stopLoader();
+									
 									Velocity(fullScreenSummonerForm, {opacity: 0, duration: 1000}, function(){
 										fullScreenSummonerForm.style.display = 'none';
-										
 										SummonerMatchHistory.style.display = 'block';
 										summonerStats.style.display = 'block';
 										Velocity(SummonerMatchHistory, {opacity: 1, duration: 1000});
@@ -199,7 +199,6 @@
 							DOMElements.stopLoader();
 							DOMElements.displayFlashMessage('Aucun résultat pour ce nom d\'invocateur', 'errors', 4000);
 
-							$scope.summonerErrors = 'Aucun résultat pour ce nom d\'invocateur';
 						}
 
 					});
