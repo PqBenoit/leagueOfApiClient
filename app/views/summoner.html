@@ -30,9 +30,9 @@
 				<div ng-if="game.stats.win == false">Défaite</div>
 				<div class="imgs">
 
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show champ" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
-					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.8.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.11.1/img/champion/{{avatars.data[game.championId].image.full}}' width="48px" height="48px" class="animate-show champ" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.11.1/img/spell/{{spells.data[game.spell1].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
+					<img ng-src='http://ddragon.leagueoflegends.com/cdn/5.11.1/img/spell/{{spells.data[game.spell2].image.full}}' width="24px" height="24px" class="animate-show spell" fade-in>
 				</div>
 
 				<p class="game-score">
@@ -50,14 +50,14 @@
 
 				<div>
 					<p>
-						<img ng-if="game.stats.item0" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item0}}.png" alt="objet 0 en fin de partie" width="24px" height="24px"> 
-						<img ng-if="game.stats.item1" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item1}}.png" alt="objet 1 en fin de partie" width="24px" height="24px">
-						<img ng-if="game.stats.item2" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item2}}.png" alt="objet 2 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item0" ng-if="game.stats.item0 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item0}}.png" alt="objet 0 en fin de partie" width="24px" height="24px"> 
+						<img ng-if="game.stats.item1" ng-if="game.stats.item1 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item1}}.png" alt="objet 1 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item2" ng-if="game.stats.item2 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item2}}.png" alt="objet 2 en fin de partie" width="24px" height="24px">
 					</p>
 					<p>
-						<img ng-if="game.stats.item3" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item3}}.png" alt="objet 3 en fin de partie" width="24px" height="24px"> 
-						<img ng-if="game.stats.item4" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item4}}.png" alt="objet 4 en fin de partie" width="24px" height="24px">
-						<img ng-if="game.stats.item5" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/{{game.stats.item5}}.png" alt="objet 5 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item3" ng-if="game.stats.item3 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item3}}.png" alt="objet 3 en fin de partie" width="24px" height="24px"> 
+						<img ng-if="game.stats.item4" ng-if="game.stats.item4 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item4}}.png" alt="objet 4 en fin de partie" width="24px" height="24px">
+						<img ng-if="game.stats.item5" ng-if="game.stats.item5 != ''" src="http://ddragon.leagueoflegends.com/cdn/5.10.1/img/item/{{game.stats.item5}}.png" alt="objet 5 en fin de partie" width="24px" height="24px">
 					</p>
 				</div>
 
