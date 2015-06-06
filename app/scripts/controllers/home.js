@@ -8,6 +8,10 @@
  */
 angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout, mapService, DOMElements, API, $http, $location, $rootScope) {	
 
+
+	var $region = document.getElementById('info-container');
+		$scope.names = [];
+
 	/**
 	 * @function bindRegions
 	 * @memberof root.controllers.HomeCtrl
@@ -104,15 +108,17 @@ angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout,
 	$scope.returnFreeChampions = function (region)
 	{
 	  	var champArray = [], 
-				regionInfo = {};
+			regionInfo = {};
 
 		$region.className = ' info-container-loading';
-		$scope.names = [];
 
 		$http.get('https://' + region + '.api.pvp.net/api/lol/' + region + '/v1.2/champion?freeToPlay=true&api_key=fa48a883-3b7d-4ba9-a996-805f017b53dc')
 			.success(function(freeData, status){
 				$http.get('https://global.api.pvp.net/api/lol/static-data/' + region.toLowerCase() + '/v1.2/champion/?champData=image&dataById=true&api_key=525fce0a-e89d-45c6-ad88-8422b0bba969')
 					.success(function(data, status){
+						
+						$scope.names = [];
+
 						for(var i = 0; i < freeData.champions.length; i++){
 							$scope.names.push(data.data[freeData.champions[i].id].image.full);
 						}
@@ -128,13 +134,14 @@ angular.module('leagueOfApp').controller('HomeCtrl', function ($scope, $timeout,
 			});
 	};
 
+	/**
+	 * Add world map background svg
+	 */
 	mapService.setMap(function(countries) {	
 
 		$scope.countries = countries
 
 	});
-
-	var $region = document.getElementById('info-container');
 
 	$scope.bindRegions($scope.countries);
 });
